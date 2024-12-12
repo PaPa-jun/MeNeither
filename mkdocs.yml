@@ -22,6 +22,7 @@ nav:
       - Neural Network: notes/MathineLearning/iris.md
   - Introduction to Algorithm:
     - notes/IntroductionToAlgorithm/index.md
+    - 算法基础: notes/IntroductionToAlgorithm/Fundation.md
   - 运筹学:
     - notes/OperationResearch/index.md
     - 增广拉格朗日函数法: notes/OperationResearch/AugementedLagrangianMethod.md
@@ -119,6 +120,11 @@ markdown_extensions:
   - pymdownx.caret
   - pymdownx.mark
   - pymdownx.tilde
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
 
 # mathjax
 extra_javascript:
@@ -126,4 +132,4 @@ extra_javascript:
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
 
 extra_css:
-  - stylesheets/extra.css
+  - stylesheets/font.css

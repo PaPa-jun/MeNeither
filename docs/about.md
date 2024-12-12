@@ -1,4 +1,4 @@
-# 
+
 
 <h1 align="center">Hi , I'm YufengPeng <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="35"></h1>
 
@@ -35,7 +35,7 @@
 
     :simple-git: :simple-github: :simple-markdown: :simple-json: :simple-flask: :simple-fastapi: :simple-latex: :simple-mysql: :simple-milvus: 
     
-    :simple-ollama: :simple-docker: :simple-materialformkdocs: :material-microsoft-visual-studio-code:
+    :simple-docker: :simple-materialformkdocs: :material-microsoft-visual-studio-code: :material-microsoft-office:
 
 - :fontawesome-solid-computer: **Operating System**
 
