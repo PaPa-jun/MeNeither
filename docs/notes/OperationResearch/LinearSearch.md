@@ -14,7 +14,7 @@ $$
 x^{k + 1} = x^k + \alpha_k d^k
 $$
 
-我们称 $d^k$ 为迭代点 $x^k$ 处的**搜索方向**，$\alpha^k$ 为相应的**步长**。这里要求 $d^k$ 是一个**下降方向**，即 $(d^k)^\mathbf{T}\nabla f(x^k) < 0$。这个下降性质保证了搜索过程会让目标函数值减小。
+我们称 $d^k$ 为迭代点 $x^k$ 处的**搜索方向**，$\alpha^k$ 为相应的**步长**。这里要求 $d^k$ 是一个**下降方向**，即 $(d^k)^\top\nabla f(x^k) < 0$。这个下降性质保证了搜索过程会让目标函数值减小。
 
 线搜索算法研究的是如何确定搜索步长即 $\alpha^k$ 的问题。首先研究这个问题是 $d^k$ 的选取千差万别但是 $\alpha^k$ 的选择在不同的算法中非常相似。考虑构造辅助函数：
 
@@ -42,7 +42,7 @@ $$
     设 $d^k$ 是点 $x^k$ 处的下降方向，若
 
     $$
-    \varphi(\alpha) \leqslant \varphi(0) + c_1 \alpha \nabla f(x^k)^{\mathbf{T}}d^k
+    \varphi(\alpha) \leqslant \varphi(0) + c_1 \alpha \nabla f(x^k)^{\top}d^k
     $$
 
     则称步长 $\alpha$ 满足 Armijo 准则，其中 $c_1 \in (0, 1)$ 是一个常数。
@@ -50,7 +50,7 @@ $$
 Armijo 准则的几何含义很直观，它指的是点 $(\alpha, \varphi(\alpha))$ 必须在直线 
 
 $$
-\ell (\alpha) = \varphi(0) + c_1 \alpha \nabla f(x^k)^{\mathbf{T}}d^k
+\ell (\alpha) = \varphi(0) + c_1 \alpha \nabla f(x^k)^{\top}d^k
 $$
 
 的下方。注意到 $\varphi(\alpha) = f(x^k + \alpha d^k)$ 和 $\varphi(0) = f(x^k)$，且因为 $d^k$ 是下降方向，所以直线的斜率为负，因此满足 Armijo 条件的步长确实能让函数值下降。在实际应用中 $c_1$ 通常选择为一个很小的正数，例如 $10^{-3}$，这使得 Armijo 准则非常容易满足。但是仅仅使用 Armijo 准则无法保证算法的收敛性，这是因为 $\alpha = 0$ 显然满足这个要求，研究这样的步长是没有意义的。为此 Armijo 准则通常与其他准则一起使用。
@@ -66,7 +66,7 @@ $$
 其中
 
 $$
-j = \min \{ j = 0, 1, \cdots | f(x^k + \gamma^j \hat{\alpha} d^k) \leqslant f(x^k) + c_1 \gamma^j \hat{\alpha}\nabla f(x^k)^{\mathbf{T}}d^k \}
+j = \min \{ j = 0, 1, \cdots | f(x^k + \gamma^j \hat{\alpha} d^k) \leqslant f(x^k) + c_1 \gamma^j \hat{\alpha}\nabla f(x^k)^{\top}d^k \}
 $$
 
 参数 $\gamma \in (0, 1)$ 是一个给定的实数。标准算法如下：
@@ -77,7 +77,7 @@ $$
     \begin{algorithmic}
     \STATE 选择初始步长 $\hat{\alpha}$，参数 $\gamma, c \in (0, 1)$；
     \STATE 初始化 $\alpha \gets \hat{\alpha}$；
-    \WHILE{$f(x^k + \alpha d^k) > f(x^k) + c\alpha \nabla f(x^k)^{\mathbf{T}d^k}$}
+    \WHILE{$f(x^k + \alpha d^k) > f(x^k) + c\alpha \nabla f(x^k)^{\top d^k}$}
         \STATE 令 $\alpha \gets \gamma \alpha$;
     \ENDWHILE
     \STATE 输出 $\alpha_k = \alpha$.
@@ -96,8 +96,8 @@ $$
 
     $$
     \begin{align*}
-    &\varphi(\alpha) \leqslant \varphi(0) + c \alpha \nabla f(x^k)^{\mathbf{T}}d^k \\
-    &\varphi(\alpha) \geqslant \varphi(0) + (1 - c) \alpha \nabla f(x^k)^{\mathbf{T}}d^k
+    &\varphi(\alpha) \leqslant \varphi(0) + c \alpha \nabla f(x^k)^{\top}d^k \\
+    &\varphi(\alpha) \geqslant \varphi(0) + (1 - c) \alpha \nabla f(x^k)^{\top}d^k
     \end{align*}
     $$
 
@@ -107,8 +107,8 @@ Armijo-Goldstein 准则的几何含义就是将 $\alpha$ 限制在了两条直�
 
 $$
 \begin{align*}
-&\ell_1(\alpha) = \varphi(0) + c \alpha \nabla f(x^k)^{\mathbf{T}}d^k \\
-&\ell_2(\alpha) \geqslant \varphi(0) + (1 - c) \alpha \nabla f(x^k)^{\mathbf{T}}d^k
+&\ell_1(\alpha) = \varphi(0) + c \alpha \nabla f(x^k)^{\top}d^k \\
+&\ell_2(\alpha) \geqslant \varphi(0) + (1 - c) \alpha \nabla f(x^k)^{\top}d^k
 \end{align*}
 $$
 
@@ -123,14 +123,14 @@ Armijo-GoldStein 准则能够使得函数值充分下降，但是它可能避开
 
     $$
     \begin{align*}
-    &\varphi(\alpha) \leqslant \varphi(0) + c_1 \alpha \nabla f(x^k)^{\mathbf{T}}d^k \\
-    &\nabla f(x^k + \alpha d^k)^{\mathbf{T}}d^k \geqslant c_2 \nabla f(x^k)^{\mathbf{T}}d^k
+    &\varphi(\alpha) \leqslant \varphi(0) + c_1 \alpha \nabla f(x^k)^{\top}d^k \\
+    &\nabla f(x^k + \alpha d^k)^{\top}d^k \geqslant c_2 \nabla f(x^k)^{\top}d^k
     \end{align*}
     $$
 
     则称步长 $\alpha$ 满足 Armijo-Wolfe 准则，其中 $c_1, c_2 \in (0, 1)$ 为给定的常数且 $c_1 < c_2$。
 
-准则中，第一个不等式就是 Armijo 准则，第二个则是 Wolfe 准则的本质要求。注意到 $\varphi'(\alpha) = \nabla f(x^k + \alpha d^k)^\mathbf{T}d^k$，因此 Wolfe 准则实际要求 $\varphi(\alpha)$ 在 $\alpha$ 处切线的斜率不能小于 $\varphi'(0)$ 的 $c_2$ 倍。同时，注意到 $\varphi(\alpha^*) = 0$，且 $\nabla f(x^k)^{\mathbf{T}}d^k \leqslant 0$，因此最优点永远满足 Armijo-Wolfe 条件，所以避免了 Armijo-GoldStein 的问题，且由于有一个下界，所以取得的 $\alpha$ 也不会太小。
+准则中，第一个不等式就是 Armijo 准则，第二个则是 Wolfe 准则的本质要求。注意到 $\varphi'(\alpha) = \nabla f(x^k + \alpha d^k)^\top d^k$，因此 Wolfe 准则实际要求 $\varphi(\alpha)$ 在 $\alpha$ 处切线的斜率不能小于 $\varphi'(0)$ 的 $c_2$ 倍。同时，注意到 $\varphi(\alpha^*) = 0$，且 $\nabla f(x^k)^{\top}d^k \leqslant 0$，因此最优点永远满足 Armijo-Wolfe 条件，所以避免了 Armijo-GoldStein 的问题，且由于有一个下界，所以取得的 $\alpha$ 也不会太小。
 
 ## 收敛性分析
 
@@ -159,7 +159,7 @@ Armijo-GoldStein 准则能够使得函数值充分下降，但是它可能避开
     其中 $\cos \theta_k$ 为负梯度 $-\nabla f(x^k)$ 和下降方向 $d^k$ 夹角的余弦，即
 
     $$
-    \cos \theta_k = \frac{- \nabla f(x^k)^{\mathbf{T}}d^k}{\Vert f(x^k) \Vert \Vert d^k \Vert}
+    \cos \theta_k = \frac{- \nabla f(x^k)^{\top}d^k}{\Vert f(x^k) \Vert \Vert d^k \Vert}
     $$
 
 上述条件指出，只要迭代点满足 Wolfe 准则，对梯度利普希茨连续且有下界的函数总能推出
