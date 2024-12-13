@@ -112,13 +112,13 @@ $$
 \end{align*}
 $$
 
-之间，这两条直线以 $\varphi(0)$ 为交点，斜率上 $|\ell_1| \leqslant |\ell_2|$，它确实避免了选择过小的 $\alpha$。
+之间，这两条直线以 $(0， \varphi(0))$ 为交点，斜率上 $|\ell_1| \leqslant |\ell_2|$，它确实避免了选择过小的 $\alpha$。
 
 ### Arimjo-Wolfe 准则
 
 Armijo-GoldStein 准则能够使得函数值充分下降，但是它可能避开了 $\alpha$ 的最优值。为此我们引入 Armijo-Wolf 准则。
 
-!!! note "Armijo-Wolf 准则"
+!!! note "Armijo-Wolfe 准则"
     设 $d^k$ 是点 $x^k$ 处的下降方向，若
 
     $$
@@ -128,6 +128,10 @@ Armijo-GoldStein 准则能够使得函数值充分下降，但是它可能避开
     \end{align*}
     $$
 
-    则称步长 $\alpha$ 满足 Armijo-Wolf 准则，其中 $c_1, c_2 \in (0, 1)$ 为给定的常数且 $c_1 < c_2$。
+    则称步长 $\alpha$ 满足 Armijo-Wolfe 准则，其中 $c_1, c_2 \in (0, 1)$ 为给定的常数且 $c_1 < c_2$。
+
+准则中，第一个不等式就是 Armijo 准则，第二个则是 Wolfe 准则的本质要求。注意到 $\varphi'(\alpha) = \nabla f(x^k + \alpha d^k)^\mathbf{T}d^k$，因此 Wolfe 准则实际要求 $\varphi(\alpha)$ 在 $\alpha$ 处切线的斜率不能小于 $\varphi'(0)$ 的 $c_2$ 倍。同时，注意到 $\varphi(\alpha^*) = 0$，且 $\nabla f(x^k)^{\mathbf{T}}d^k \leqslant 0$，因此最优点永远满足 Armijo-Wolfe 条件，所以避免了 Armijo-GoldStein 的问题，且由于有一个下界，所以取得的 $\alpha$ 也不会太小。
+
+## 非单调线搜索准则
 
 
