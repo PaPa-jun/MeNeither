@@ -132,6 +132,81 @@ Armijo-GoldStein 准则能够使得函数值充分下降，但是它可能避开
 
 准则中，第一个不等式就是 Armijo 准则，第二个则是 Wolfe 准则的本质要求。注意到 $\varphi'(\alpha) = \nabla f(x^k + \alpha d^k)^\mathbf{T}d^k$，因此 Wolfe 准则实际要求 $\varphi(\alpha)$ 在 $\alpha$ 处切线的斜率不能小于 $\varphi'(0)$ 的 $c_2$ 倍。同时，注意到 $\varphi(\alpha^*) = 0$，且 $\nabla f(x^k)^{\mathbf{T}}d^k \leqslant 0$，因此最优点永远满足 Armijo-Wolfe 条件，所以避免了 Armijo-GoldStein 的问题，且由于有一个下界，所以取得的 $\alpha$ 也不会太小。
 
-## 非单调线搜索准则
+## 收敛性分析
 
+下面开始研究线搜索算法的收敛性。此收敛性建立在一般的线搜索算法框架上，因此得到的结论也较弱。不过可以帮助我们理解线搜索类算法收敛的本质要求。
 
+!!! note "Zoutendijk 条件"
+
+    考虑一般的迭代格式：
+
+    $$
+    x^{k + 1} = x^k + \alpha_k d^k
+    $$
+
+    在迭代过程中满足 Wolfe 准则。假设目标函数 $f$ 有下界、连续可微且梯度 $L$-利普希茨连续，即
+
+    $$
+    \Vert \nabla f(x) - \nabla f(y) \Vert \leqslant L \Vert x - y \Vert, \forall x, y \in \mathbb{R}^n
+    $$
+
+    那么
+
+    $$
+    \sum_{k = 1}^{\infty} \cos^2 \theta_k \Vert \nabla f(x^k) \Vert^2 < + \infty
+    $$
+
+    其中 $\cos \theta_k$ 为负梯度 $-\nabla f(x^k)$ 和下降方向 $d^k$ 夹角的余弦，即
+
+    $$
+    \cos \theta_k = \frac{- \nabla f(x^k)^{\mathbf{T}}d^k}{\Vert f(x^k) \Vert \Vert d^k \Vert}
+    $$
+
+上述条件指出，只要迭代点满足 Wolfe 准则，对梯度利普希茨连续且有下界的函数总能推出
+
+$$
+\sum_{k = 1}^{\infty} \cos^2 \theta_k \Vert \nabla f(x^k) \Vert^2 < + \infty
+$$
+
+成立。根据这个性质，可以推导出线搜索算法最基本的收敛性。
+
+!!! note "线搜索算法的收敛性"
+    对于迭代法
+
+    $$
+    x^{k + 1} = x^k + \alpha_k d^k
+    $$
+
+    设 $\theta_k$ 为每一步负梯度 $-\nabla f(x^k)$ 与下降方向 $d^k$ 的夹角，并假设对任意的 $k$，存在 $\gamma > 0$，使得
+
+    $$
+    \theta_k < \frac{\pi}{2} - \gamma
+    $$
+
+    则在 Zoutendijk 条件成立下，有
+
+    $$
+    \lim_{k \to \infty} \nabla f(x^k) = 0
+    $$
+
+    **证明**. 假设结论不成立，即存在子列 $\{k_l\}$ 和正常数 $\delta > 0$，使得
+
+    $$
+    \Vert \nabla f(x^{k_l}) \Vert \geqslant \delta, l = 1, 2, \cdots
+    $$
+
+    根据假设，对任意的 $k$，有
+
+    $$
+    \cos \theta_k > \sin \gamma > 0
+    $$
+
+    对子列做下列求和，有
+
+    $$
+    \sum_{k = 0}^{\infty} \cos^2\theta_k \Vert \nabla f(x^k) \Vert^2 \geqslant \sum_{l = 1}^{\infty}\cos^2 \theta_{k_l} \Vert \nabla f(x^{k_l}) \Vert^2 \geqslant \sum_{l = 1}^{\infty} \sin^2\gamma \delta \to +\infty
+    $$
+
+    与 Zoutendijk 条件矛盾。
+
+线搜索算法收敛性建立在 Zuotendijk 条件之上，其本质要求是迭代过程中，对任意的 $k$，存在 $\gamma > 0$，使得 $\theta_k < \dfrac{\pi}{2} - \gamma$，即**每一步的下降方向和负梯度方向不能趋于正交**。

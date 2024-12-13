@@ -134,7 +134,6 @@ extra_javascript:
   - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
   - javascripts/pseudocode.min.js
   - javascripts/pesudocode-render.js
-  # - https://unpkg.com/function-plot/dist/function-plot.js
 
 extra_css:
   - stylesheets/font.css
