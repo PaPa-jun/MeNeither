@@ -2,40 +2,16 @@
 @font-face {
     font-family: 'Fira Code';
     src: url('../assets/fonts/Fira_Code_v6/woff2/FiraCode-Regular.woff2') format('woff2'),
-         url('../assets/fonts/Fira_Code_v6/woff/FiraCode-Regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Fira Code';
-    src: url('../assets/fonts/Fira_Code_v6/woff2/FiraCode-Bold.woff2') format('woff2'),
-         url('../assets/fonts/Fira_Code_v6/woff/FiraCode-Bold.woff') format('woff');
-    font-weight: 700;
-    font-style: normal;
+        url('../assets/fonts/Fira_Code_v6/woff/FiraCode-Regular.woff') format('woff');
 }
 
 /* PingFang SC @font-face definitions */
 @font-face {
     font-family: 'PingFang SC';
     src: url('../assets/fonts/PingFang-Relaxed/PingFangRelaxedSC-Regular.otf') format('opentype');
-    font-weight: 400;
-    font-style: normal;
 }
 
-@font-face {
-    font-family: 'PingFang SC';
-    src: url('../assets/fonts/PingFang-Relaxed/PingFangRelaxedSC-Medium.otf') format('opentype');
-    font-weight: 500;
-    font-style: normal;
-}
-
-/* 应用 Fira Code 到所有 <pre> 和 <code> 标签 */
-pre, code {
-    font-family: 'Fira Code', monospace;
-}
-
-/* 应用 PingFang SC 到正文内容 */
-body, p, h1, h2, h3, h4, h5, h6 {
-    font-family: 'PingFang SC', sans-serif;
+:root {
+    --md-text-font: 'PingFang SC';
+    --md-code-font: 'Fira Code';
 }

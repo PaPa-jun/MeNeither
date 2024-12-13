@@ -20,11 +20,13 @@ nav:
       - notes/MathineLearning/exp.md
       - GPU Performance: notes/MathineLearning/GPUPerformance.md
       - Neural Network: notes/MathineLearning/iris.md
-  - Introduction to Algorithm:
+  - 算法导论:
     - notes/IntroductionToAlgorithm/index.md
     - 算法基础: notes/IntroductionToAlgorithm/Fundation.md
+    - 函数增长: notes/IntroductionToAlgorithm/Runtime.md
   - 运筹学:
     - notes/OperationResearch/index.md
+    - 线搜索方法: notes/OperationResearch/LinearSearch.md
     - 增广拉格朗日函数法: notes/OperationResearch/AugementedLagrangianMethod.md
 - 资源分享:
   - resources/index.md
@@ -126,10 +128,16 @@ markdown_extensions:
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
 
-# mathjax
 extra_javascript:
-  - javascripts/mathjax.js
-  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+  - javascripts/katex.js
+  - https://unpkg.com/katex@0/dist/katex.min.js
+  - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
+  - javascripts/pseudocode.min.js
+  - javascripts/pesudocode-render.js
+  # - https://unpkg.com/function-plot/dist/function-plot.js
 
 extra_css:
   - stylesheets/font.css
+  - stylesheets/pseudocode.min.css
+  - https://unpkg.com/katex@0/dist/katex.min.css
+  
