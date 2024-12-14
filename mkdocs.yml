@@ -94,7 +94,7 @@ extra:
   generator: false
 
 copyright: Copyright &copy; 2023 - 2024 YufengPeng
-repo_url: https://github.com/PaPa-jun/papa-jun.github.io
+repo_url: https://github.com/PaPa-jun/MeNeither.git
 repo_name: PaPa-jun/papa-jun.github.io
 
 markdown_extensions:
