@@ -1,70 +1,28 @@
-name: ci
-
+name: ci 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
-
 permissions:
   contents: write
-
-env:
-  DOMAIN: ${{ secrets.DOMAIN }}
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # 确保可以访问所有历史记录以检出 gh-pages 分支
-
       - name: Configure Git Credentials
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-
       - uses: actions/setup-python@v5
         with:
           python-version: 3.x
-
-      - name: Install Dependencies
-        run: pip install mkdocs-material mkdocs-glightbox
-
-      - name: Deploy Documentation
-        run: mkdocs gh-deploy --force
-
-      - name: Checkout gh-pages Branch
-        run: |
-          git checkout gh-pages || git checkout -b gh-pages
-          git pull origin gh-pages
-
-      - name: Check and Update CNAME File
-        id: cname-check
-        run: |
-          NEED_COMMIT=false
-          if [ ! -f "CNAME" ]; then
-            echo "${{ env.DOMAIN }}" > CNAME
-            echo "CNAME file created."
-            NEED_COMMIT=true
-          else
-            CURRENT_DOMAIN=$(cat CNAME)
-            if [ "$CURRENT_DOMAIN" != "${{ env.DOMAIN }}" ]; then
-              echo "${{ env.DOMAIN }}" > CNAME
-              echo "CNAME file updated to match env.DOMAIN."
-              NEED_COMMIT=true
-            else
-              echo "CNAME file already matches env.DOMAIN."
-            fi
-          fi
-          echo "NEED_COMMIT=$NEED_COMMIT" >> $GITHUB_ENV
-
-      - name: Commit and Push Changes
-        if: env.NEED_COMMIT == 'true'
-        run: |
-          git add CNAME
-          git commit -m "Update CNAME file to ${{ env.DOMAIN }}" || echo "No changes to commit."
-          git push origin gh-pages
+      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV 
+      - uses: actions/cache@v4
+        with:
+          key: mkdocs-material-${{ env.cache_id }}
+          path: .cache
+          restore-keys: |
+            mkdocs-material-
+      - run: pip install mkdocs-material mkdocs-glightbox
+      - run: mkdocs gh-deploy --force
