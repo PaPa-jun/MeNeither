@@ -51,13 +51,13 @@ $$
     可知
 
     $$
-    \begin{align*}
+    \begin{aligned}
     &f(y) - f(x) - \nabla f(x)^\top (y - x) \\
     =& \int_0^1 (g'(t) - g'(0))\,\mathrm{d}t \\
     =& \int_0^1 (\nabla f(x + t(y - x)) - \nabla f(x))^\top (y - x) \mathrm{d}t \\
     \leqslant & \int_0^1 \Vert \nabla f(x + t(y - x)) - \nabla f(x) \Vert \Vert y - x \Vert \mathrm{d}t \\
     \leqslant & \int_0^1 L \Vert y - x \Vert^2 t \mathrm{d}t = \frac{L}{2} \Vert y - x\Vert^2
-    \end{align*}
+    \end{aligned}
     $$
 
     其中最后一行的不等式利用了梯度利普希茨连续的条件，整理后即为二次上界定理中的式子。定理对于 $f(x)$ 定义域的要求可以减弱为 $\mathbf{dom}f$ 是凸集，以满足证明中 $g(t)$ 在 $t\in [0, 1]$ 时有定义。
@@ -124,22 +124,22 @@ $$
     记 $\widetilde{x} = x - \alpha \nabla f(x)$ 并限制 $0 < \alpha \leqslant \dfrac{1}{L}$，我们有
 
     $$
-    \begin{align*}
+    \begin{aligned}
     f(\widetilde{x}) &\leqslant f(x) - \dfrac{\alpha}{2} \Vert \nabla f(x) \Vert^2 \\
     & \leqslant f^* + \nabla f(x)^\top (x - x^*) - \dfrac{\alpha}{2} \Vert \nabla f(x) \Vert^2 \\
     &= f^* + \dfrac{1}{2\alpha} \left( \Vert x - x^* \Vert^2 - \Vert x - x^* - \alpha \nabla f(x) \Vert^2 \right) \\
     &= f^* + \dfrac{1}{2\alpha} \left( \Vert x - x^* \Vert^2 - \Vert \widetilde{x} - x^* \Vert^2 \right)
-    \end{align*}
+    \end{aligned}
     $$
 
     其中第二个不等式为 $f$ 的凸性。在上式中取 $x = x^{i-1}, \widetilde{x} = x^i$ 并将不等式对 $i = 1, 2, \dots, k$ 求和得到
 
     $$
-    \begin{align*}
+    \begin{aligned}
     \sum_{i = 1}^{k} \left( f(x^i) - f^* \right) &\leqslant \dfrac{1}{2\alpha} \sum_{i = 1}^k \left( \Vert x^{i - 1} - x^* \Vert^2 - \Vert x^i - x^* \Vert^2 \right) \\
     &= \dfrac{1}{2\alpha}\left( \Vert x^0 - x^* \Vert^2 - \Vert x^k - x^* \Vert^2 \right) \\
     &\leqslant \dfrac{1}{2\alpha} \Vert x^0 - x^* \Vert^2
-    \end{align*}
+    \end{aligned}
     $$
 
     根据二次上界得知 $f(x^i)$ 是非增的，所以
@@ -207,12 +207,12 @@ $$
     然后我们估计在固定步长下梯度法的收敛速度。设步长 $\alpha \in \left( 0, \dfrac{2}{m + L} \right)$，则
 
     $$
-    \begin{align*}
+    \begin{aligned}
     \Vert x^{k + 1} - x^* \Vert^2_2 &= \Vert x^k - \alpha \nabla f(x^k) - x^* \Vert^2 \\
     &= \Vert x^k - x^* \Vert^2 - 2\alpha \nabla f(x^k)^\top (x^k - x^*) + \alpha^2 \Vert \nabla f(x^k) \Vert^2 \\
     &\leqslant \left( 1 - \alpha\dfrac{2mL}{m + L} \right) \Vert x^k - x^* \Vert^2 + \alpha \left( \alpha - \dfrac{2}{m + L} \right) \Vert \nabla f(x^k) \Vert^2 \\
     &\leqslant \left( 1 - \alpha \dfrac{2mL}{m + L} \right) \Vert x^k - x^* \Vert^2
-    \end{align*}
+    \end{aligned}
     $$
 
     注意到 $\nabla f(x^*) = 0$ 因此

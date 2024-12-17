@@ -8,22 +8,23 @@ nav:
   - 课程笔记:
       - notes/index.md
       - Machine Learning:
-          - notes/MathineLearning/index.md
-          - Linear Regression: notes/MathineLearning/LinearRegression.md
-          - Performing Evaluation: notes/MathineLearning/PerformanceEvaluation.md
-          - Regularization: notes/MathineLearning/RidgeRegression.md
-          - Linear Model I: notes/MathineLearning/LinearModel.md
-          - Linear Model II: notes/MathineLearning/LinearModelII.md
-          - Neural Network: notes/MathineLearning/NeuralNetwork.md
-          - Backpropagation: notes/MathineLearning/Backpropagation.md
-          - Experiments:
-              - notes/MathineLearning/exp.md
-              - GPU Performance: notes/MathineLearning/GPUPerformance.md
-              - Neural Network: notes/MathineLearning/iris.md
+        - notes/MathineLearning/index.md
+        - Linear Regression: notes/MathineLearning/LinearRegression.md
+        - Performing Evaluation: notes/MathineLearning/PerformanceEvaluation.md
+        - Regularization: notes/MathineLearning/RidgeRegression.md
+        - Linear Model I: notes/MathineLearning/LinearModel.md
+        - Linear Model II: notes/MathineLearning/LinearModelII.md
+        - Neural Network: notes/MathineLearning/NeuralNetwork.md
+        - Backpropagation: notes/MathineLearning/Backpropagation.md
+        - Experiments:
+          - notes/MathineLearning/exp.md
+          - GPU Performance: notes/MathineLearning/GPUPerformance.md
+          - Neural Network: notes/MathineLearning/iris.md
       - 算法导论:
         - notes/IntroductionToAlgorithm/index.md
         - 算法基础: notes/IntroductionToAlgorithm/Fundation.md
         - 函数增长: notes/IntroductionToAlgorithm/Runtime.md
+        - 分治策略: notes/IntroductionToAlgorithm/DivideAndconker.md
       - 运筹学:
         - notes/OperationResearch/index.md
         - 线搜索方法: notes/OperationResearch/LinearSearch.md
@@ -70,10 +71,9 @@ theme:
         name: Switch to system preference
 
   features:
-    - navigation.instant
     - navigation.tabs
     - navigation.prune
-    # - navigation.indexes
+    - navigation.indexes
     - toc.follow
     - search.suggest
     - search.highlight
@@ -132,11 +132,14 @@ markdown_extensions:
           format: !!python/name:pymdownx.superfences.fence_code_format
 
 extra_javascript:
-  - javascripts/mathjax.js
-  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+  - javascripts/katex.js
+  - https://unpkg.com/katex@0/dist/katex.min.js
+  - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
   - javascripts/pseudocode.min.js
   - javascripts/pesudocode-render.js
 
 extra_css:
   - stylesheets/font.css
   - stylesheets/pseudocode.min.css
+  - https://unpkg.com/katex@0/dist/katex.min.css
+  - stylesheets/katex.css
