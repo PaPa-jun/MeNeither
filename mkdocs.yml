@@ -27,6 +27,7 @@ nav:
         - 分治策略: notes/IntroductionToAlgorithm/DivideAndconker.md
       - 运筹学:
         - notes/OperationResearch/index.md
+        - 对偶理论: notes/OperationResearch/DualProblem.md
         - 线搜索方法: notes/OperationResearch/LinearSearch.md
         - 梯度下降法: notes/OperationResearch/GradientDescent.md
         - 增广拉格朗日函数法: notes/OperationResearch/AugementedLagrangianMethod.md
