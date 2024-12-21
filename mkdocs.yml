@@ -25,6 +25,8 @@ nav:
         - 算法基础: notes/IntroductionToAlgorithm/Fundation.md
         - 函数增长: notes/IntroductionToAlgorithm/Runtime.md
         - 分治策略: notes/IntroductionToAlgorithm/DivideAndconker.md
+        - 堆排序: notes/IntroductionToAlgorithm/HeapSort.md
+        - 快速排序: notes/IntroductionToAlgorithm/QuickSort.md
       - 运筹学:
         - notes/OperationResearch/index.md
         - 对偶理论: notes/OperationResearch/DualProblem.md
