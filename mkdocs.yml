@@ -33,9 +33,11 @@ nav:
         - 线搜索方法: notes/OperationResearch/LinearSearch.md
         - 梯度下降法: notes/OperationResearch/GradientDescent.md
         - 增广拉格朗日函数法: notes/OperationResearch/AugementedLagrangianMethod.md
-      - 操作系统:
-        - notes/OperatingSystem/index.md
-        - 操作系统概述: notes/OperatingSystem/Introduction.md
+      - 计算机网络:
+        - notes/ComputingNetworks/index.md
+        - 数据链路层: 
+          - notes/ComputingNetworks/DataLinkLayer.md
+          - 错误检测和纠正: notes/ComputingNetworks/ErrorDetectionAndCorrection.md
   - 资源分享:
       - resources/index.md
   - 博客:
