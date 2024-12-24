@@ -25,6 +25,7 @@ nav:
         - 数据链路层: 
           - notes/ComputingNetworks/DataLinkLayer.md
           - 错误检测和纠正: notes/ComputingNetworks/ErrorDetectionAndCorrection.md
+          - 协议: notes/ComputingNetworks/DataLinkLayerProtocol.md
   - 资源分享:
       - resources/index.md
   - 博客:
