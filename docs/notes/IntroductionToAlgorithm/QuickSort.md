@@ -13,7 +13,7 @@
 
 快速排序递归地将问题划分成两部分，然后分别解决，具体地，其分支策略如下：
 
-- **分解**：数组 `A[p, ..., r - 1]` 被划分成两个子数组 `A[p...q - 1]` 和 `A[q + 1...r]`，使得前者中的每一个元素都小于等于 `A[q]` 后者的每一个元素都大于等于 `A[q]`；
+- **分解**：数组 `A[p...r]` 被划分成两个子数组 `A[p...q - 1]` 和 `A[q + 1...r]`，使得前者中的每一个元素都小于等于 `A[q]` 后者的每一个元素都大于等于 `A[q]`；
 - **解决**：通过递归调用快速排序，堆子数组进行排序；
 - **合并**：无需合并。
 
@@ -33,19 +33,19 @@ def QuickSort(A, p, r):
 
 划分数组的 `Partition` 算法是快速排序的灵魂，实现了对数组的原址排序。算法的关键是两个位置指针 $i, j$，**其中** $j$ **作为一个递增的指针对数组进行遍历**，$i$ **则指示着较小的那个子数组（一般是左侧）的最后一个位置**。
 
-具体地，令 $j$ 从 $0$ 开始递增，且比较 `A[j]` 和数组的**最后一个元素**（被称为划分的**主元素**）即 `A[r - 1]`，如果 `A[j]` 小于等于 `A[r - 1]`，则将 `A[j]` 换到左侧较小的子数组中去，同时更新指针 $i$ 使其满足性质。
+具体地，令 $j$ 从 $0$ 开始递增，且比较 `A[j]` 和数组的**最后一个元素**（被称为划分的**主元素**）即 `A[r]`，如果 `A[j]` 小于等于 `A[r]`，则将 `A[j]` 换到左侧较小的子数组中去，同时更新指针 $i$ 使其满足性质。
 
-如此对整个数组遍历一次，使得数组除了最后一个元素外，之前的每一个元素都以最后一个元素为分界，排列在位置 $i + 1$ 的两侧，因此最后只需要交换 `A[r - 1]` 和 `A[i + 1]` 并返回 $i + 1$ 即可完成划分操作。
+如此对整个数组遍历一次，使得数组除了最后一个元素外，之前的每一个元素都以最后一个元素为分界，排列在位置 $i + 1$ 的两侧，因此最后只需要交换 `A[r]` 和 `A[i + 1]` 并返回 $i + 1$ 即可完成划分操作。
 
 ```python title="划分数组" linenums="1" hl_lines="4-6"
 def Partition(A, p, r):
     i = p - 1
-    for j in range(p, r - 1):
-        if A[j] <= A[r - 1]:
+    for j in range(p, r):
+        if A[j] <= A[r]:
             i += 1 # 时刻保证 i 指向左侧子数组的最后一个位置
             A[i], A[j] = A[j], A[i] # 将小于最后一个元素的数交换到左侧子数组的位置
-    A[i + 1], A[r - 1], A[r - 1], A[i + 1]
-    return A[i + 1]
+    A[i + 1], A[r] = A[r], A[i + 1]
+    return i + 1
 ```
 
 利用下面的循环不变量可以证明算法的正确性：
@@ -53,9 +53,9 @@ def Partition(A, p, r):
 !!! note "循环不变量"
     在算法 3 至 6 行循环体的每一轮迭代开始时，对任意数组下标 $k$，有：
 
-    - 若 $p \leqslant k \leqslant i$，则 $A[k] \leqslant A[r - 1]$；
-    - 若 $i + 1 \leqslant k \leqslant j - 1$，则 $A[k] > A[r - 1]$；
-    - 若 $k = r$，则 $A[k] = A[r - 1]$。
+    - 若 $p \leqslant k \leqslant i$，则 $A[k] \leqslant A[r]$；
+    - 若 $i + 1 \leqslant k \leqslant j - 1$，则 $A[k] > A[r]$；
+    - 若 $k = r$，则 $A[k] = A[r]$。
 
 具体证明本文不再赘述。划分算法对数组进行一次遍历，因此其时间复杂度为 $\Theta(n)$。
 
@@ -98,17 +98,17 @@ $$
 通过上面的分析我们知道，快速排序的性能取决于划分的子集是否平衡，因此可以考虑引入随机抽样来使得划分尽可能平衡。我们在 `Partition` 算法中加入一步随机抽样选择主元素，实现随机化快速排序。
 
 ```python title="快速排序的随机化版本" linenums="1"
-def RandomPartition(A, p, r):
+def RandomizedPartition(A, p, r):
     i = random.randint(p, r)
-    A[r - 1], A[i] = A[i], A[r - 1]
+    A[r], A[i] = A[i], A[r]
     return Partition(A, p, r)
 
-def RandomQuickSort(A, p, r):
+def RandomizedQuickSort(A, p, r):
     if p < r:
-        q = RandomPartition(A, p, r)
-        RandomQuickSort(A, p, q - 1)
-        RandomQuickSort(A, q + 1, r)
+        q = RandomizedPartition(A, p, r)
+        RandomizedQuickSort(A, p, q - 1)
+        RandomizedQuickSort(A, q + 1, r)
 ```
 
-**在输入元素互异的情况下**，使用 `RandomPartition` 的快速排序算法的期望运行时间为 $O(n\lg n)$。
+**在输入元素互异的情况下**，使用 `RandomizedPartition` 的快速排序算法的期望运行时间为 $O(n\lg n)$。
 
