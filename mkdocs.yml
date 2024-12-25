@@ -14,6 +14,7 @@ nav:
         - 分治策略: notes/IntroductionToAlgorithm/DivideAndconker.md
         - 堆排序: notes/IntroductionToAlgorithm/HeapSort.md
         - 快速排序: notes/IntroductionToAlgorithm/QuickSort.md
+        - 线性时间排序: notes/IntroductionToAlgorithm/LinearTimeSort.md
       - 运筹学:
         - notes/OperationResearch/index.md
         - 对偶理论: notes/OperationResearch/DualProblem.md
