@@ -17,6 +17,7 @@ nav:
         - 线性时间排序: notes/IntroductionToAlgorithm/LinearTimeSort.md
         - 中位数和顺序统计量: notes/IntroductionToAlgorithm/MedianAndOrderStatistics.md
         - 红黑树: notes/IntroductionToAlgorithm/RedBlackTree.md
+        - 数据结构的扩张: notes/IntroductionToAlgorithm/DataStructure.md
       - 运筹学:
         - notes/OperationResearch/index.md
         - 对偶理论: notes/OperationResearch/DualProblem.md
