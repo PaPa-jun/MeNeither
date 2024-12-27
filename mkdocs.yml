@@ -28,9 +28,15 @@ nav:
       - 计算机网络:
         - notes/ComputingNetworks/index.md
         - 数据链路层: 
-          - notes/ComputingNetworks/DataLinkLayer.md
+          - 概述: notes/ComputingNetworks/DataLinkLayer.md
           - 错误检测和纠正: notes/ComputingNetworks/ErrorDetectionAndCorrection.md
           - 协议: notes/ComputingNetworks/DataLinkLayerProtocol.md
+        - 介质访问控制子层: 
+          - 概述: notes/ComputingNetworks/MediumAccessControlSublayer.md
+          - 信道分配协议: notes/ComputingNetworks/ChannelAllocationProtocol.md
+          - 以太网: notes/ComputingNetworks/Ethernet.md
+          - 无线局域网: notes/ComputingNetworks/WirelessLocalAreaNetwork.md
+          - 网桥: notes/ComputingNetworks/Bridge.md
   - 资源分享:
       - resources/index.md
   - 博客:
