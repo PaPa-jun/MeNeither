@@ -19,6 +19,8 @@ nav:
         - 红黑树: notes/IntroductionToAlgorithm/RedBlackTree.md
         - 数据结构的扩张: notes/IntroductionToAlgorithm/DataStructure.md
         - 动态规划: notes/IntroductionToAlgorithm/DynamicProgramming.md
+        - 贪心算法: notes/IntroductionToAlgorithm/GreedyAlgorithm.md
+        - 回溯法: notes/IntroductionToAlgorithm/Backtracking.md
       - 运筹学:
         - notes/OperationResearch/index.md
         - 对偶理论: notes/OperationResearch/DualProblem.md
