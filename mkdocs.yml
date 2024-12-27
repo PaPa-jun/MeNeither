@@ -23,9 +23,18 @@ nav:
         - 回溯法: notes/IntroductionToAlgorithm/Backtracking.md
       - 运筹学:
         - notes/OperationResearch/index.md
+        - 线性规划: notes/OperationResearch/LinearProgramming.md
+        - 单纯形法: notes/OperationResearch/SimplexMethod.md
+        - 最短路径问题: notes/OperationResearch/ShortestPathProblem.md
+        - 最大流问题: notes/OperationResearch/MaxFlowProblem.md
+        - 运输问题: notes/OperationResearch/TransportationProblem.md
         - 对偶理论: notes/OperationResearch/DualProblem.md
+        - 最优理论: notes/OperationResearch/OptimalTheory.md
         - 线搜索方法: notes/OperationResearch/LinearSearch.md
         - 梯度下降法: notes/OperationResearch/GradientDescent.md
+        - 次梯度法: notes/OperationResearch/SubgradientMethod.md
+        - 牛顿类算法: notes/OperationResearch/NewtonMethod.md
+        - 拟牛顿法: notes/OperationResearch/QuasiNewtonMethod.md
         - 增广拉格朗日函数法: notes/OperationResearch/AugementedLagrangianMethod.md
       - 计算机网络:
         - notes/ComputingNetworks/index.md
