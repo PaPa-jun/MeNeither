@@ -16,7 +16,7 @@
     则称 $g$ 为函数 $f$ 在点 $x$ 处的一个**次梯度**。进一步，称集合
 
     $$
-    \partial f(x) = \{ g \vert g \in \mathbb{R}^n, f(y) \geqslant f(x) + g^\top (y - x), \forall y \in \mathbf{dom}f \}
+    \partial f(x) = \{ g \mid g \in \mathbb{R}^n, f(y) \geqslant f(x) + g^\top (y - x), \forall y \in \mathbf{dom}f \}
     $$
 
     为 $f$ 在点 $x$ 处的**次微分**。
@@ -60,7 +60,7 @@
     \partial f(x) = 
     \begin{cases}
         \frac{x}{\Vert x \Vert_2} & x \neq 0 \\
-        \{ g \vert \Vert g \Vert_2 \leqslant 1 \} & x = 0
+        \{ g \mid \Vert g \Vert_2 \leqslant 1 \} & x = 0
     \end{cases}
     \end{aligned}
     $$
@@ -91,7 +91,7 @@ $$
 
 - $f(x)$ 为**凸函数**；
 - $f(x)$ 至少存在一个有限的极小值点 $x^*$，且 $f(x^*) > -\infty$；
-- $f(x)$ 本身利普希茨连续，即 $\vert f(x) - f(y) \Vert \leqslant G\Vert x - y \Vert, \forall x, y \in \mathbb{R}^n$。
+- $f(x)$ 本身利普希茨连续，即 $\vert f(x) - f(y) \vert \leqslant G\Vert x - y \Vert, \forall x, y \in \mathbb{R}^n$。
 
 !!! note "凸函数 $G$-利普希茨连续则次梯度有界"
     设 $f(x)$ 为凸函数，则 $f(x)$ 是 $G$-利普希茨连续的当且仅当 $f(x)$ 的次梯度是有界的，即
@@ -100,7 +100,8 @@ $$
     \Vert g \Vert \leqslant G, \forall g \in \partial f(x), x \in \mathbb{R}^n
     $$
 
-    证明. 先证充分性：假设对任意次梯度 $g$ 都有 $g \leqslant G$，并选取 $g_y \in \partial f(y), g_x \in \partial f(x)$，由次梯度的定义有
+??? quote "证明"
+    先证充分性：假设对任意次梯度 $g$ 都有 $g \leqslant G$，并选取 $g_y \in \partial f(y), g_x \in \partial f(x)$，由次梯度的定义有
 
     $$
     \begin{aligned}

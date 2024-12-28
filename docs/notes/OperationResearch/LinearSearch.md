@@ -68,7 +68,7 @@ $$
 其中
 
 $$
-j = \min \{ j = 0, 1, \cdots | f(x^k + \gamma^j \hat{\alpha} d^k) \leqslant f(x^k) + c_1 \gamma^j \hat{\alpha}\nabla f(x^k)^{\top}d^k \}
+j = \min \{ j = 0, 1, \cdots \mid f(x^k + \gamma^j \hat{\alpha} d^k) \leqslant f(x^k) + c_1 \gamma^j \hat{\alpha}\nabla f(x^k)^{\top}d^k \}
 $$
 
 参数 $\gamma \in (0, 1)$ 是一个给定的实数。标准算法如下：

@@ -35,6 +35,7 @@ nav:
         - 次梯度法: notes/OperationResearch/SubgradientMethod.md
         - 牛顿类算法: notes/OperationResearch/NewtonMethod.md
         - 拟牛顿法: notes/OperationResearch/QuasiNewtonMethod.md
+        - 信赖域算法: notes/OperationResearch/TrustRegionMethod.md
         - 增广拉格朗日函数法: notes/OperationResearch/AugementedLagrangianMethod.md
       - 计算机网络:
         - notes/ComputingNetworks/index.md

@@ -30,7 +30,8 @@ $$
     f(y) \leqslant f(x) + \nabla f(x)^\top (y - x) + \frac{L}{2} \Vert y - x \Vert^2, \quad \forall x, y \in \mathbf{dom}f
     $$
 
-    **证明**. 对任意 $x, y \in \mathbf{R}^n$，构造辅助函数
+??? quote "证明"
+    对任意 $x, y \in \mathbf{R}^n$，构造辅助函数
 
     $$
     g(t) = f(x + t(y - x)), t \in [0, 1]
@@ -84,7 +85,8 @@ $$
 !!! note "梯度下降法非凸函数上的收敛性"
     若 $f$ 是 $L$-利普希茨光滑函数并且 $f$ 有最小值 $f^*$，则选取步长 $\alpha_k = \frac{1}{L}$，我们有 $\lim\limits_{k \to \infty} \Vert \nabla f(x_k) \Vert = 0$。
 
-    **证明**. 由李氏光滑性，当选取 $\alpha = \frac{1}{L}$ 为步长时，$f(x_k)$ 的一个二次上界为
+??? quote "证明"
+    由李氏光滑性，当选取 $\alpha = \frac{1}{L}$ 为步长时，$f(x_k)$ 的一个二次上界为
 
     $$
     q_{x_k}(y) = f(x_k) + \nabla f(x_k)^\top (y - x_k) + \frac{1}{2\alpha} \Vert y - x_k \Vert^2
@@ -115,7 +117,8 @@ $$
 
     得到的点列 $\{x_k\}$ 的函数值收敛到最优值，且在函数值的意义下收敛速度为 $\mathcal{O}\left(\dfrac{1}{k}\right)$。
 
-    **证明**. 因为函数 $f$ 是利普希茨可微函数，对任意的 $x$，根据二次上界
+??? quote "证明"
+    因为函数 $f$ 是利普希茨可微函数，对任意的 $x$，根据二次上界
 
     $$
     f(x - \alpha \nabla f(x)) \leqslant f(x) - \alpha \left(1 - \frac{L \alpha}{2}\right) \Vert \nabla f(x) \Vert^2
@@ -164,8 +167,6 @@ $$
     $$
     \left( \nabla f(x) - \nabla f(x) \right)^\top (x - y) \geqslant \dfrac{1}{L} \Vert \nabla f(x) - \nabla f(y) \Vert^2
     $$
-
-    证明略去。
     
 上述引理的第三条余强制性其实是对单调性的一种加强，若函数 $f(x)$ 为单调函数，则其函数值的变化与自变量的变化同号，即
 
@@ -186,7 +187,8 @@ $$
 
     得到的点列 $\{x_k\}$ 的函数值收敛到最优值，且为 $\mathcal{Q}$ 线性收敛。
 
-    **证明**. 首先根据 $f$ 强凸且 $\nabla f$ 利普希茨连续，可得
+??? quote "证明"
+    首先根据 $f$ 强凸且 $\nabla f$ 利普希茨连续，可得
 
     $$
     g(x) = f(x) - \dfrac{m}{2}x^\top x

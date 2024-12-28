@@ -70,7 +70,7 @@ $$
 当固定 $(\lambda, \mu)$ 时，拉格朗日函数关于 $x$ 可能无界，那么对偶函数在 $(\lambda, \mu)$ 处的取值为 $-\infty$，此时对偶函数提供的下界时无意义的。因此我们规定拉格朗日对偶函数的定义域为
 
 $$
-\mathbf{dom } g = \{ (\lambda, \mu) | \mu \geqslant 0, g(\lambda, \mu) > -\infty \}
+\mathbf{dom } g = \{ (\lambda, \mu) \mid \mu \geqslant 0, g(\lambda, \mu) > -\infty \}
 $$
 
 当 $(\lambda, \mu) \in \mathbf{dom } g$ 时，称其为**对偶可行解**。记对偶问题的最优值为 $q^*$，如果有 $p^* = q^*$，则称**强对偶原理**成立。 

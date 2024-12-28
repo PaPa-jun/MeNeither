@@ -217,7 +217,7 @@ $$
     假设初始矩阵 $B^0$ 是对称正定矩阵，目标函数 $f(x)$ 是二阶连续可微函数，下水平集
 
     $$
-    \mathcal{L} = \{ x \in \mathcal{R}^n \vert f(x) \leqslant f(x^0) \}
+    \mathcal{L} = \{ x \in \mathcal{R}^n \mid f(x) \leqslant f(x^0) \}
     $$
 
     是凸的，并且存在正数 $m$ 以及 $M$ 使得对于任意 $z \in \mathbb{R}^n$ 以及任意的 $x \in \mathcal{L}$ 有
