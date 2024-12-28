@@ -191,5 +191,61 @@ def solve_n_queens(n):
     return result  # 返回所有解
 ```
 
+### 全排列问题
 
+!!! question "全排列问题"
+    给定正整数 $n$ 生成 $\{1, 2, \dots, n\}$ 的所有排列。
 
+这个问题的解和解空间都很好定义，就是一个长度为 $n$ 的整数序列。考虑 $n = 3$ 的情况，问题的解空间为
+
+```mermaid
+graph TD
+    A(($$r$$)):::root --> B1(($$1$$)):::middle
+    A --> B2(($$2$$)):::middle
+    A --> B3(($$3$$)):::middle
+    B1 --> C1(($$1, 2$$)):::middle
+    B1 --> C2(($$1, 3$$)):::middle
+    B2 --> C3(($$2, 1$$)):::middle
+    B2 --> C4(($$2, 3$$)):::middle
+    B3 --> C5(($$3, 1$$)):::middle
+    B3 --> C6(($$3, 2$$)):::middle
+    C1 --> D1(($$1, 2, 3$$)):::leaf
+    C1 --> D2(($$1, 3, 2$$)):::leaf
+    C2 --> D3(($$1, 3, 2$$)):::leaf
+    C2 --> D4(($$1, 2, 3$$)):::leaf
+    C3 --> D5(($$2, 1, 3$$)):::leaf
+    C3 --> D6(($$2, 3, 1$$)):::leaf
+    C4 --> D7(($$2, 3, 1$$)):::leaf
+    C4 --> D8(($$2, 1, 3$$)):::leaf
+    C5 --> D9(($$3, 1, 2$$)):::leaf
+    C5 --> D10(($$3, 2, 1$$)):::leaf
+    C6 --> D11(($$3, 2, 1$$)):::leaf
+    C6 --> D12(($$3, 1, 2$$)):::leaf
+
+    classDef root fill:#00FF00,stroke:#000,stroke-width:2px;
+    classDef middle fill:#FFFF00,stroke:#000,stroke-width:2px;
+    classDef leaf fill:#FF0000,stroke:#000,stroke-width:2px;
+```
+
+上图已经做了剪枝，事实上如果单出暴力搜索，解空间会更大。
+
+```python title="全排列问题" linenums="1"
+def permute(nums):
+    # 回溯法生成全排列
+    def backtrack(start):
+        if start == len(nums):
+            # 找到一个排列，添加到结果中
+            result.append(nums[:])
+            return
+        for i in range(start, len(nums)):
+            # 交换元素
+            nums[start], nums[i] = nums[i], nums[start]
+            # 递归生成下一个位置的排列
+            backtrack(start + 1)
+            # 回溯，恢复原始顺序
+            nums[start], nums[i] = nums[i], nums[start]
+
+    result = []
+    backtrack(0)  # 从第0个位置开始生成排列
+    return result  # 返回所有排列
+```
