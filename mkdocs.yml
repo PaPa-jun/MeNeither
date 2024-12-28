@@ -21,6 +21,7 @@ nav:
         - 动态规划: notes/IntroductionToAlgorithm/DynamicProgramming.md
         - 贪心算法: notes/IntroductionToAlgorithm/GreedyAlgorithm.md
         - 回溯法: notes/IntroductionToAlgorithm/Backtracking.md
+        - 摊还分析: notes/IntroductionToAlgorithm/AmortizedAnalysis.md
       - 运筹学:
         - notes/OperationResearch/index.md
         - 线性规划: notes/OperationResearch/LinearProgramming.md
