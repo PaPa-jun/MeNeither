@@ -23,6 +23,7 @@ nav:
         - 回溯法: notes/IntroductionToAlgorithm/Backtracking.md
         - 摊还分析: notes/IntroductionToAlgorithm/AmortizedAnalysis.md
         - 二项堆: notes/IntroductionToAlgorithm/BinomialHeap.md
+        - 图算法: notes/IntroductionToAlgorithm/GraphAlgorithms.md
       - 运筹学:
         - notes/OperationResearch/index.md
         - 线性规划: notes/OperationResearch/LinearProgramming.md
@@ -38,6 +39,7 @@ nav:
         - 牛顿类算法: notes/OperationResearch/NewtonMethod.md
         - 拟牛顿法: notes/OperationResearch/QuasiNewtonMethod.md
         - 信赖域算法: notes/OperationResearch/TrustRegionMethod.md
+        - 罚函数法: notes/OperationResearch/PenaltyFunctionMethod.md
         - 增广拉格朗日函数法: notes/OperationResearch/AugementedLagrangianMethod.md
       - 计算机网络:
         - notes/ComputingNetworks/index.md
