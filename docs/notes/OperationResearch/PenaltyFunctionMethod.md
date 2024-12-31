@@ -99,7 +99,7 @@ $$
     设 $f(x)$ 与 $c_i(x), i \in \mathcal{E}$ 连续可微，正数序列 $\varepsilon_k \to 0, \sigma_k \to \infty$，在 Algorithm 1 中，子问题的解 $x^{k + 1}$ 满足 $ \Vert \nabla_x P_E(x^{k + 1}, \sigma_k) \Vert \leqslant \varepsilon_k$，而对 $\{x^k\}$ 的任何极限点 $x^*$，都有 $\{ \nabla c_i(x^*), i \in \mathcal{E} \}$ 线性无关，则 $x^*$ 是等式约束优化问题的 KKT 点，且
 
     $$
-    \lim_{x \to \infty} (-\sigma_k c_i(x^{k + 1})) = \lambda_i^*, \quad \forall i \in \mathcal{E}
+    \lim_{k \to \infty} (-\sigma_k c_i(x^{k + 1})) = \lambda_i^*, \quad \forall i \in \mathcal{E}
     $$
 
     其中 $\lambda_i^*$ 是约束 $c_i(x^*) = 0$ 对应的拉格朗日乘子。
