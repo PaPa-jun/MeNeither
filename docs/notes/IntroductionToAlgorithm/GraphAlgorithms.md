@@ -257,6 +257,29 @@ def KruskalMST(G, w):
     return A
 ```
 
+算法的运行时间依赖于不相交集合数据结构的实现方式。如果采用**不相交集合森林**表示并增加按秩合并和路径压缩的功能，算法的运行时间为 $O(E\lg V)$。
+
 ### Prim 算法
+
+Prim 算法和 Kruskal 算法的区别在于，前者保证了集合 $A$ 中的边总是构成一棵树，再利用安全边辨认规则的推论，每次选择和 $A$ 相连的权重最小的边加入集合。
+
+```python title="Prim 算法" linenums="1"
+def PrimMST(G, w, r):
+    for u in G.V:
+        u.key = float("inf")
+        u.pi = None
+    r.key = 0
+    Q = G.V
+    while Q:
+        u = ExtractMin(Q)
+        for v in G.E(u):
+            if v in Q and w(u, v) < v.key:
+                v.pi = u
+                v.key = w(u, v)
+```
+
+算法的运行时间依赖于优先队列的实现，如果采用**斐波那契堆**来实现，则 Prim 算法的运行时间为 $O(E + V\lg V)$，如果采用二叉最小堆实现，则运行时间为 $O(E\lg V)$。
+
+## 单源最短路径
 
 
