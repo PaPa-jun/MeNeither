@@ -71,7 +71,7 @@ $$
 梯度法的另一个理解是按照下式迭代
 
 $$
-x_{k + 1} = \arg\min_y f(x_k) + \nabla f(x_k)^\top (y - x_k) + \frac{L}{2}\Vert y - x_k \Vert^2
+x_{k + 1} = \mathop{\arg\min}\limits_y f(x_k) + \nabla f(x_k)^\top (y - x_k) + \frac{L}{2}\Vert y - x_k \Vert^2
 $$
 
 注意到，右边的式子就是利普希茨连续函数的二次上界，是一个关于 $y$ 的二次函数，令导数为零可以求得闭式解即

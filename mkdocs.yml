@@ -41,6 +41,9 @@ nav:
         - 信赖域算法: notes/OperationResearch/TrustRegionMethod.md
         - 罚函数法: notes/OperationResearch/PenaltyFunctionMethod.md
         - 增广拉格朗日函数法: notes/OperationResearch/AugementedLagrangianMethod.md
+        - 近似点梯度法: notes/OperationResearch/ApproximateGradientMethod.md
+        - 交替方向乘子法: notes/OperationResearch/AlternatingDirectionMethod.md
+        - 随机梯度下降法: notes/OperationResearch/StochasticGradientDescent.md
       - 计算机网络:
         - notes/ComputingNetworks/index.md
         - 数据链路层: 

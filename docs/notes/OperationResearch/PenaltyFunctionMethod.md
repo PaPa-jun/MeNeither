@@ -43,7 +43,7 @@ $$
     \begin{algorithmic}
     \STATE 给定 $\sigma_1 > 0$，$x^0$，$k \gets 1$。罚因子增长系数 $\rho > 1$；
     \WHILE{未达到收敛准则}
-        \STATE 以 $x^k$ 为初始点，求解 $x^{k + 1} = \arg\min_x P_E(x, \sigma_k)$；
+        \STATE 以 $x^k$ 为初始点，求解 $x^{k + 1} = \mathop{\arg\min}_x P_E(x, \sigma_k)$；
         \STATE 选取 $\sigma_{k + 1} = \rho \sigma_k$；
         \STATE $k \gets k + 1$；
     \ENDWHILE
@@ -51,7 +51,7 @@ $$
     \end{algorithm}
 </div>
 
-算法通过逐步增大罚因子来使得迭代点接近可行域，第 3 行的 $\arg\min$ 的含义如下面三种之一：
+算法通过逐步增大罚因子来使得迭代点接近可行域，第 3 行的 $\mathop{\arg\min}$ 的含义如下面三种之一：
 
 - $x^{k + 1}$ 是罚函数 $P_E(x, \sigma_k)$ 的全局极小解；
 - $x^{k + 1}$ 是罚函数 $P_E(x, \sigma_k)$ 的局部极小解；
