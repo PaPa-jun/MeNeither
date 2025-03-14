@@ -21,7 +21,7 @@
 
     [:material-arrow-right: 去这里](./notes/index.md)
 
-- :paperclips: __资源分享__
+- :material-paperclip: __资源分享__
 
     ---
 
