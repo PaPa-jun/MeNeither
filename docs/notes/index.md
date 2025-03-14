@@ -5,8 +5,9 @@
 
 ## 2024 Fall
 
-- [运筹学](./OperationResearch/index.md)
 - [算法导论](./IntroductionToAlgorithm/index.md)
+- [运筹学](./OperationResearch/index.md)
+- [数据结构](./DataStructure/index.md)
 - [计算机网络](./ComputingNetworks/index.md)
 
 ??? info "更新说明"

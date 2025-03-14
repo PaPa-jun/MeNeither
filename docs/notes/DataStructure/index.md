@@ -59,4 +59,4 @@ mindmap
 
 ## 算法和算法的评价
 
-见 [算法导论](../IntroductionToAlgorithm/index.md)。
+见[算法导论](../IntroductionToAlgorithm/index.md)。

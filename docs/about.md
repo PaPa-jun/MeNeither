@@ -29,7 +29,7 @@
 
     :material-language-python: :material-language-c: :material-language-html5: :material-language-css3: :material-language-javascript: :material-vuejs:
 
-- :tools: **Sfotware & Tools**
+- :material-hammer-wrench: **Sfotware & Tools**
 
     ---
 
@@ -41,12 +41,12 @@
 
     ---
 
-    :simple-macos: :fontawesome-brands-windows: :simple-linux: :simple-ubuntu:
+    :simple-macos: :fontawesome-brands-windows: :simple-ubuntu:
 
-- :musical_score: **Instruments & Compose**
+- :material-music-clef-treble: **Instruments & Compose**
 
     ---
-    :musical_keyboard: :fontawesome-solid-guitar: :simple-guitarpro: :fontawesome-solid-carrot:
+    :material-piano: :fontawesome-solid-guitar: :simple-guitarpro: :fontawesome-solid-carrot:
 
 </div>
 
@@ -55,6 +55,16 @@
 ## Some of My Projects
 
 <div class="grid cards" markdown>
+
+- :simple-curseforge: **Minecraft Modpack Installer**
+
+    ---
+
+    An automated solution for installing CurseForge Minecraft ModPacks. This innovative tool streamlines the process by automatically downloading required files, systematically organizing folders, and configuring launcher settings.
+
+    ---
+
+    [:material-arrow-right: Visit Project](https://github.com/PaPa-jun/Modpack-Installer)
 
 - :material-database: **UstcMDb**
 
