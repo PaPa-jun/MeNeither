@@ -44,6 +44,9 @@ nav:
         - 近似点梯度法: notes/OperationResearch/ApproximateGradientMethod.md
         - 交替方向乘子法: notes/OperationResearch/AlternatingDirectionMethod.md
         - 随机梯度下降法: notes/OperationResearch/StochasticGradientDescent.md
+      - 数据结构:
+        - notes/DataStructure/index.md
+        - 线性表: notes/DataStructure/LinearTable.md
       - 计算机网络:
         - notes/ComputingNetworks/index.md
         - 数据链路层: 
