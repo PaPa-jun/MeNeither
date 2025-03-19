@@ -8,7 +8,7 @@
 
 ---
 
-## About Me
+## About Me [:material-file-pdf-box:{ .middle }](./resources/pdfs/odds/Resume.pdf)
 
 - 🎓 Student at the University of Science and Technology of China (USTC).
 - 💻 Passionate about software development and algorithm design.
