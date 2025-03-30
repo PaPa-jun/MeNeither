@@ -13,7 +13,7 @@ $$
 ??? tip "优化目标"
     不一定非要用距离的平方和作为优化的目标，也可以选用其他的，只是平方和易于计算。
 
-从代数角度来看，PCA 的输入为矩阵 $\mathbf{A} = \mathcal{R}^{n \times d}$，目标是找到一个**秩**为 $k$ 的矩阵 $\mathbf{A}_k$ 使得
+从代数角度来看，PCA 的输入为矩阵 $\mathbf{A} \in \mathcal{R}^{n \times d}$，目标是找到一个**秩**为 $k$ 的矩阵 $\mathbf{A}_k$ 使得
 
 $$
 \Vert \mathbf{A} - \mathbf{A}_k \Vert_F
@@ -81,3 +81,7 @@ $$
         - 不适合 Streaming Data
         - 不适合分布式计算
         - 泄漏隐私
+
+## JL-Transform
+
+

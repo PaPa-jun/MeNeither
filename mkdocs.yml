@@ -46,7 +46,7 @@ nav:
         - 随机梯度下降法: notes/OperationResearch/StochasticGradientDescent.md
       - 大数据算法:
         - notes/BigDataAlgo/index.md
-        - 数据降纬: notes/BigDataAlgo/DimensionalityReduction.md
+        - 数据降维: notes/BigDataAlgo/DimensionalityReduction.md
       - 数据结构:
         - notes/DataStructure/index.md
         - 线性表: notes/DataStructure/LinearTable.md
