@@ -1,4 +1,4 @@
-# 基础数学工具
+# 集中不等式
 
 在统计学习理论中，对于给定一个场景下提出的新模型或新策略，我们可能需要计算与证明我们的策略与理论上最好情况之间的差异，或称为遗憾值的上下界(regret bound)。这使得我们需要一系列相应的数学工具来支持我们的证明工作。
 
@@ -181,8 +181,90 @@ $$
     \begin{aligned}
         &\frac{\mathbb{E}(e^{\lambda (X - \mu)})}{e^{\lambda \varepsilon}} = \frac{\mathbb{E}(e^{\lambda X})}{e^{\lambda (\mu + \varepsilon)}}
         = \frac{e^{\left(\mu \lambda + \frac{\sigma^2 \lambda^2}{2} \right)}}{e^{\lambda (\mu + \varepsilon)}} = \exp \left( \frac{\sigma^2\lambda^2}{2} - \lambda \varepsilon \right) \\
-        \implies & \inf_{\lambda \in [0, h]}\frac{\mathbb{E}(e^{\lambda (X - \mu)})}{e^{\lambda \varepsilon}} = \arg\min_{\lambda \in [0, h]} \frac{\sigma^2\lambda^2}{2} - \lambda \varepsilon \implies \lambda = \frac{\varepsilon}{\sigma^2}
+        \implies & \inf_{\lambda \in [0, h]}\frac{\mathbb{E}(e^{\lambda (X - \mu)})}{e^{\lambda \varepsilon}} \iff \arg\min_{\lambda \in [0, h]} \frac{\sigma^2\lambda^2}{2} - \lambda \varepsilon \implies \lambda = \frac{\varepsilon}{\sigma^2}
     \end{aligned}
     $$
 
     将解出的 $\lambda$ 回带得到一维正态分布的切尔诺夫界为 $\exp\left( -\dfrac{\varepsilon^2}{2\sigma^2} \right)$。
+
+## 次高斯性
+
+上一节的我们推导出了高斯分布的切尔诺夫界，事实上有很多分布都会满足这个界。
+
+!!! note "次高斯"
+    假设 $X$ 是一个均值为 $\mu = \mathbb{E}(X)$ 的随机变量，若存在 $\sigma > 0$ 使得
+
+    $$
+        \mathbb{E}(e^{\lambda(X - \mu)}) \leqslant e^{\frac{\sigma^2\lambda^2}{2}}\, \quad \forall \lambda \in \mathcal{R}
+    $$
+
+    则称它为 $\sigma$-次高斯的，其中 $\sigma$ 称作次高斯参数。
+
+!!! tip "次高斯随机变量的切尔诺夫界"
+    若随机变量 $X$ 为 $\sigma$-次高斯的，则 $X$ 满足
+
+    $$
+    P\left( (X - \mu) \geqslant \varepsilon \right) \leqslant e^{-\frac{\varepsilon^2}{2 \sigma^2}}
+    $$
+
+    对 $\forall \varepsilon \geqslant 0$ 成立。
+
+??? quote "证明"
+    由于 $(X - \mu) \geqslant \varepsilon \iff \exp(\lambda(X - \mu)) \geqslant \exp(\lambda \varepsilon)$ 可以得到
+
+    $$
+    \begin{aligned}
+        P((X - \mu) \geqslant \varepsilon) &= P(\exp(\lambda(X - \mu)) \geqslant \exp(\lambda \varepsilon)) \\
+        &\leqslant \mathbb{E}(\exp(\lambda(X - \mu)))\exp(-\lambda \varepsilon) \\
+        &\leqslant \exp\left(\frac{\sigma^2\lambda^2}{2} - \lambda \varepsilon\right)
+    \end{aligned}
+    $$
+
+    这里得到的就跟上节最后的例子一样了，解优化问题得到切尔诺夫界为 $\exp\left( -\dfrac{\varepsilon^2}{2\sigma^2} \right)$。
+
+次高斯随机变量在机器学习中常用到，一个典型的例子就是**所有的有界随机变量都是次高斯的**。
+
+??? tip "次高斯随机变量的性质"
+    假设 $X$ 是 $\sigma$-次高斯的随机变量，$X_1$ 和 $X_2$ 相互独立，分别为 $\sigma_1, \sigma_2$ 次高斯，则有：
+
+    1. $Var(X) \leqslant \sigma^2$；
+    2. $\forall c$ 有 $cX$ 是 $\vert c \vert \sigma$-次高斯的随机变量；
+    3. $X_1 + X_2$ 是 $\sqrt{\sigma_1^2 + \sigma_2^2}$-次高斯的。
+
+## 霍夫丁界
+
+下面介绍的**霍夫丁引理**保证了有界随机变量的次高斯性。
+
+!!! note "霍夫丁引理"
+    设 $X$ 是一个均值为 $\mu$ 的随机变量，若 $a \leqslant X \leqslant b$ 几乎处处成立，则 $X$ 是次高斯的，其次高斯参数为 $\sigma = \frac{b - a}{2}$。
+
+之前介绍的尾概率界都是**单个**随机变量的界，下面要引入的**霍夫丁界**描述了**有限个独立的随机变量求和**的尾概率界。
+
+!!! note "霍夫丁界"
+    若随机变量 $X_1, X_2, \cdots, X_n$ 相互独立，且 $X_i$ 的均值为 $\mu_i$，次高斯参数为 $\sigma_i$ 则对任意 $\varepsilon > 0$ 有
+
+    $$
+        P\left( \sum_{i = 1}^n(X_i - \mu_i) \geqslant \varepsilon \right) \leqslant \exp\left( -\frac{\varepsilon^2}{2 \sum_{i = 1}^n \sigma_i^2} \right)
+    $$
+
+??? quote "证明"
+    根据次高斯随机变量的性质 $\sum\limits_{i = 1}^n X_i$ 为 $\sqrt{\sum\limits_{i = 1}^n \sigma_i^2}$-次高斯的随机变量。又由期望的线性性有
+
+    $$
+        \mathbb{E}\left( \sum_{i = 1}^n X_i \right) = \sum_{i = 1}^n \mathbb{E}(X_i) = \sum_{i = 1}^n \mu_i
+    $$
+
+    根据次高斯随机变量的切尔诺夫界，有
+
+    $$
+        P\left( \sum_{i = 1}^n (X_i - \mu_i) \geqslant \varepsilon \right) \leqslant \exp\left( -\frac{\varepsilon^2}{2 \sum_{i = 1}^n \sigma_i^2} \right)
+    $$
+
+结合霍夫丁引理，我们可以得到有界随机变量的霍夫丁界。
+
+!!! note "推论"
+    若随机变量 $X_1, X_2, \cdots, X_n$ 相互独立，且 $X_i \in [a, b], \forall i \in 1, 2, \cdots n$，则
+
+    $$
+        P\left( \sum_{i = 1}^n (X_i - \mu_i) \geqslant \varepsilon \right) \leqslant \exp\left( -\frac{\varepsilon^2}{n(b - a)^2} \right)
+    $$
