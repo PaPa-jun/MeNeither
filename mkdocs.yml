@@ -48,6 +48,7 @@ nav:
         - notes/BigDataAlgo/index.md
         - 集中不等式: notes/BigDataAlgo/Fundation.md
         - 数据降维: notes/BigDataAlgo/DimensionalityReduction.md
+        - JL变换的应用: notes/BigDataAlgo/JLApplication.md
       - 数据结构:
         - notes/DataStructure/index.md
         - 线性表: notes/DataStructure/LinearTable.md
@@ -74,7 +75,7 @@ theme:
   language: zh
   name: material
   logo: assets/logo.svg
-  favicon: assets/favicon/favicon.ico
+  favicon: favicon.ico
   palette:
     # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"
