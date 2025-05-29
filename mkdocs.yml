@@ -75,7 +75,7 @@ theme:
   language: zh
   name: material
   logo: assets/logo.svg
-  favicon: favicon.ico
+  favicon: assets/favicon.ico
   palette:
     # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"
