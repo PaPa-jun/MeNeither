@@ -9,7 +9,7 @@
 
 <div class="grid cards" markdown>
 
-- ![Image title](./sailimu.jpg){ width=80% align=right}
+- ![Sayram](./sailimu.jpg){ width=80% align=right}
 
     第一次去赛里木湖，站在湖边极目远眺，湖水的颜色像是染缸，完全没有一丝杂质。清风拂万里，看淡云舒卷，可谓人间绝色也。
 
@@ -19,7 +19,7 @@
 
 <div class="grid cards" markdown>
 
-- ![Image title](./kashi.jpeg){ width=40% align=left}
+- ![Qeshqer](./kashi.jpeg){ width=40% align=left}
     
     新疆，喀什，高台民居的一条小巷。我背着包，挎着相机远远地走在同行队伍的后方。一个小姑娘拈着裙子从我面前跑过，走到巷子口，询问地看着远方的父亲。
     
@@ -39,7 +39,7 @@
 
 <div class="grid cards" markdown>
 
-- ![yellomontane](./yellomontane.png)
+- ![Yellomontane](./yellomontane.png)
 
     ---
 
