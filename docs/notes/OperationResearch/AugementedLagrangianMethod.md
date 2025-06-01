@@ -1,3 +1,8 @@
+---
+katex: true
+pseudocode: true
+---
+
 # 增广拉格朗日函数法
 
 回顾[罚函数法的收敛性分析](./PenaltyFunctionMethod.md/#_3)，在等式约束的罚函数算法执行过程中，通过求解子问题使得 $\nabla_x P_E(x^{k + 1}, \sigma_k) \to 0$，有

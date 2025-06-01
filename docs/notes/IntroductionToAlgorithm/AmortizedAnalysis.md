@@ -1,3 +1,7 @@
+---
+katex: true
+---
+
 # 摊还分析
 
 ??? abstract "重点"

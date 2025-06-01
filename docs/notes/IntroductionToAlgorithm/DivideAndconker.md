@@ -1,3 +1,7 @@
+---
+katex: true
+---
+
 # 分治策略
 
 ??? abstract "重点"

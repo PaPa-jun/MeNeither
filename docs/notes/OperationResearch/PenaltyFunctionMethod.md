@@ -1,3 +1,8 @@
+---
+katex: true
+pseudocode: true
+---
+
 # 罚函数法
 
 考虑约束优化问题

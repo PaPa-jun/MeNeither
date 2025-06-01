@@ -1,3 +1,7 @@
+---
+katex: true
+---
+
 # 图算法
 
 ??? abstract "重点"

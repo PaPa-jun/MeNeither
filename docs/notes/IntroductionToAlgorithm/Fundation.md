@@ -1,3 +1,7 @@
+---
+katex: true
+---
+
 # 算法基础
 
 ??? abstract "重点"

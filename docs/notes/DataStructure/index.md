@@ -1,3 +1,7 @@
+---
+katex: true
+---
+
 # 绪论
 
 ```mermaid

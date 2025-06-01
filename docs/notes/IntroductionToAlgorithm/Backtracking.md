@@ -1,3 +1,7 @@
+---
+katex: true
+---
+
 # 回溯法
 
 ??? abstract annotate "重点"

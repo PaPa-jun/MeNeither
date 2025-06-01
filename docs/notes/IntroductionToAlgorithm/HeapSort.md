@@ -1,3 +1,7 @@
+---
+katex: true
+---
+
 # 堆排序
 
 ??? abstract "重点"

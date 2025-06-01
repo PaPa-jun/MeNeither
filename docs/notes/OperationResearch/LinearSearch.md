@@ -1,3 +1,8 @@
+---
+katex: true
+pseudocode: true
+---
+
 # 线搜索方法
 
 对于无约束优化问题：

@@ -1,3 +1,7 @@
+---
+katex: true
+---
+
 # 线性时间排序
 
 ??? abstract "重点"

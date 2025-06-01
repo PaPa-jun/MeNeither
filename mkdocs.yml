@@ -75,7 +75,6 @@ theme:
   language: zh
   name: material
   logo: assets/logo.svg
-  favicon: assets/favicons/favicon.ico
   custom_dir: overrides
   palette:
     # Palette toggle for automatic mode
@@ -166,15 +165,5 @@ markdown_extensions:
   - pymdownx.tasklist:
       custom_checkbox: true
 
-extra_javascript:
-  - javascripts/katex.js
-  - https://unpkg.com/katex@0/dist/katex.min.js
-  - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
-  - javascripts/pseudocode.min.js
-  - javascripts/pesudocode-render.js
-
 extra_css:
-  - stylesheets/font.css
-  - stylesheets/pseudocode.min.css
-  - https://unpkg.com/katex@0/dist/katex.min.css
-  - stylesheets/katex.css
+  - assets/stylesheets/font.css

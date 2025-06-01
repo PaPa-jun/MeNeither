@@ -1,3 +1,7 @@
+---
+katex: true
+---
+
 # 快速排序
 
 ??? abstract "重点"

@@ -1,3 +1,7 @@
+---
+katex: true
+---
+
 # 动态规划
 
 ??? abstract annotate "重点"

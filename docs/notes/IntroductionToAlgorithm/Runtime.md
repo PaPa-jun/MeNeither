@@ -1,3 +1,7 @@
+---
+katex: true
+---
+
 # 函数增长
 
 ??? abstract "重点"
