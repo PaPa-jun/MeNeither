@@ -1,0 +1,1920 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://www.meneither.site/notes/OperationResearch/GradientDescent/">
+      
+      
+        <link rel="prev" href="../LinearSearch/">
+      
+      
+        <link rel="next" href="../SubgradientMethod/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>梯度下降法 - Me Neither</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/font.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  
+  <link rel="icon" type="image/svg+xml" href="../../../assets/images/favicon.svg" />
+  <link rel="shortcut icon" href="../../../assets/images/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/images/apple-touch-icon.png" />
+  <link rel="manifest" href="../../../assets/site.webmanifest" />
+  <meta name="apple-mobile-web-app-title" content="MeNeither" />
+  
+    <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css"> 
+    <link rel="stylesheet" href="../../../assets/stylesheets/katex.css">
+  
+  
+
+   <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="Me Neither" class="md-header__button md-logo" aria-label="Me Neither" data-md-component="logo">
+      
+  <img src="../../../assets/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Me Neither
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              梯度下降法
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/PaPa-jun/MeNeither" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    PaPa-jun/MeNeither
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../.." class="md-tabs__link">
+          
+  
+  
+    
+  
+  主页
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  课程笔记
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../resources/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  资源分享
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../blog/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  博客
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../photos/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  照片墙
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Me Neither" class="md-nav__button md-logo" aria-label="Me Neither" data-md-component="logo">
+      
+  <img src="../../../assets/logo.svg" alt="logo">
+
+    </a>
+    Me Neither
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/PaPa-jun/MeNeither" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    PaPa-jun/MeNeither
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../.." class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    主页
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    课程笔记
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            课程笔记
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../IntroductionToAlgorithm/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    算法导论
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    运筹学
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            运筹学
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LinearProgramming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    线性规划
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SimplexMethod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    单纯形法
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ShortestPathProblem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    最短路径问题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MaxFlowProblem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    最大流问题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TransportationProblem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    运输问题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DualProblem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    对偶理论
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../OptimalTheory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    最优理论
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LinearSearch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    线搜索方法
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    梯度下降法
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    梯度下降法
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      收敛性
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="收敛性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      非凸函数上的收敛性
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      凸函数上的收敛性
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      强凸函数上的收敛性
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SubgradientMethod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    次梯度法
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NewtonMethod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    牛顿类算法
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../QuasiNewtonMethod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    拟牛顿法
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TrustRegionMethod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    信赖域算法
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PenaltyFunctionMethod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    罚函数法
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AugementedLagrangianMethod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    增广拉格朗日函数法
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ApproximateGradientMethod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    近似点梯度法
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AlternatingDirectionMethod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    交替方向乘子法
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StochasticGradientDescent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    随机梯度下降法
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../BigDataAlgo/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    大数据算法
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../DataStructure/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    数据结构
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../ComputingNetworks/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    计算机网络
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../resources/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    资源分享
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../blog/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    博客
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../photos/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    照片墙
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      收敛性
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="收敛性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      非凸函数上的收敛性
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      凸函数上的收敛性
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      强凸函数上的收敛性
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">梯度下降法</h1>
+<p>梯度下降法属于最基础的梯度类算法，本质是利用函数的一阶导数信息选取下降方向 <span class="arithmatex">\(d^k\)</span>。对于光滑函数 <span class="arithmatex">\(f(x)\)</span>，在迭代点 <span class="arithmatex">\(x^k\)</span> 处，我们选择 <span class="arithmatex">\(d^k = -\nabla f(x^k)\)</span> 为下降方向，迭代格式为</p>
+<div class="arithmatex">\[
+x^{k + 1} = x^k - \alpha_k \nabla f(x^k)
+\]</div>
+<p>步长 <span class="arithmatex">\(\alpha^k\)</span> 的选择可以依赖于<a href="../LinearSearch/">线搜索算法</a>，也可以是一个固定的常数。</p>
+<h2 id="_2">收敛性</h2>
+<p>需要引入利普希茨连续的定义，如下</p>
+<div class="admonition note">
+<p class="admonition-title">利普希茨连续</p>
+<p>若给定函数 <span class="arithmatex">\(f\)</span> 是可微函数，并且对任意定义域的点 <span class="arithmatex">\(x, y\)</span>，梯度满足利普希茨连续（Lipschitz continuous），即存在 <span class="arithmatex">\(L &gt; 0\)</span> 使得</p>
+<div class="arithmatex">\[
+\Vert \nabla f(y) - \nabla f(x) \Vert \geqslant L \Vert y - x \Vert
+\]</div>
+<p>则称 <span class="arithmatex">\(f\)</span> 是梯度李氏连续，或者李氏光滑（<span class="arithmatex">\(L\)</span>-光滑）的。</p>
+</div>
+<p>梯度利普希茨连续表明 <span class="arithmatex">\(\nabla f(x)\)</span> 的变化可以被自变量 <span class="arithmatex">\(x\)</span> 的变化所控制，满足该性质的函数具有很多好的性质，一个重要的性质是其具有<strong>二次上界</strong>。</p>
+<div class="admonition note">
+<p class="admonition-title">二次上界</p>
+<p>设可微函数 <span class="arithmatex">\(f(x)\)</span> 的定义域 <span class="arithmatex">\(\mathbf{dom}f = \mathbb{R}^n\)</span>，且为梯度 <span class="arithmatex">\(L\)</span>-利普希茨连续的，则函数 <span class="arithmatex">\(f(x)\)</span> 有二次上界</p>
+<div class="arithmatex">\[
+f(y) \leqslant f(x) + \nabla f(x)^\top (y - x) + \frac{L}{2} \Vert y - x \Vert^2, \quad \forall x, y \in \mathbf{dom}f
+\]</div>
+</div>
+<details class="quote">
+<summary>证明</summary>
+<p>对任意 <span class="arithmatex">\(x, y \in \mathbf{R}^n\)</span>，构造辅助函数</p>
+<div class="arithmatex">\[
+g(t) = f(x + t(y - x)), t \in [0, 1]
+\]</div>
+<p>显然 <span class="arithmatex">\(g(0) = f(x)\)</span>，<span class="arithmatex">\(g(1) = f(y)\)</span> 以及</p>
+<div class="arithmatex">\[
+g'(t) = \nabla f(x + t(y - x))^\top (y - x)
+\]</div>
+<p>由等式</p>
+<div class="arithmatex">\[
+g(1) - g(0) = \int_0^1 g'(t)\,\mathrm{d}t
+\]</div>
+<p>可知</p>
+<div class="arithmatex">\[
+\begin{aligned}
+&amp;f(y) - f(x) - \nabla f(x)^\top (y - x) \\
+=&amp; \int_0^1 (g'(t) - g'(0))\,\mathrm{d}t \\
+=&amp; \int_0^1 (\nabla f(x + t(y - x)) - \nabla f(x))^\top (y - x) \mathrm{d}t \\
+\leqslant &amp; \int_0^1 \Vert \nabla f(x + t(y - x)) - \nabla f(x) \Vert \Vert y - x \Vert \mathrm{d}t \\
+\leqslant &amp; \int_0^1 L \Vert y - x \Vert^2 t \mathrm{d}t = \frac{L}{2} \Vert y - x\Vert^2
+\end{aligned}
+\]</div>
+<p>其中最后一行的不等式利用了梯度利普希茨连续的条件，整理后即为二次上界定理中的式子。定理对于 <span class="arithmatex">\(f(x)\)</span> 定义域的要求可以减弱为 <span class="arithmatex">\(\mathbf{dom}f\)</span> 是凸集，以满足证明中 <span class="arithmatex">\(g(t)\)</span> 在 <span class="arithmatex">\(t\in [0, 1]\)</span> 时有定义。</p>
+</details>
+<p>上述定理说明 <span class="arithmatex">\(f(x)\)</span> 可被一个二次函数上界所控制，即要求 <span class="arithmatex">\(f(x)\)</span> 的增长速度不超过二次。</p>
+<h3 id="_3">非凸函数上的收敛性</h3>
+<p>梯度法的另一个理解是按照下式迭代</p>
+<div class="arithmatex">\[
+x_{k + 1} = \mathop{\arg\min}\limits_y f(x_k) + \nabla f(x_k)^\top (y - x_k) + \frac{L}{2}\Vert y - x_k \Vert^2
+\]</div>
+<p>注意到，右边的式子就是利普希茨连续函数的二次上界，是一个关于 <span class="arithmatex">\(y\)</span> 的二次函数，令导数为零可以求得闭式解即</p>
+<div class="arithmatex">\[
+x_{k + 1} = x_k -  \frac{1}{L} \nabla f(x)
+\]</div>
+<p>符合梯度下降的迭代格式，其中步长为 <span class="arithmatex">\(\dfrac{1}{L}\)</span>，且 <span class="arithmatex">\(L\)</span> 为利普希茨常数。下面可以给出一个非凸函数上梯度下降法的收敛性质</p>
+<div class="admonition note">
+<p class="admonition-title">梯度下降法非凸函数上的收敛性</p>
+<p>若 <span class="arithmatex">\(f\)</span> 是 <span class="arithmatex">\(L\)</span>-利普希茨光滑函数并且 <span class="arithmatex">\(f\)</span> 有最小值 <span class="arithmatex">\(f^*\)</span>，则选取步长 <span class="arithmatex">\(\alpha_k = \frac{1}{L}\)</span>，我们有 <span class="arithmatex">\(\lim\limits_{k \to \infty} \Vert \nabla f(x_k) \Vert = 0\)</span>。</p>
+</div>
+<details class="quote">
+<summary>证明</summary>
+<p>由李氏光滑性，当选取 <span class="arithmatex">\(\alpha = \frac{1}{L}\)</span> 为步长时，<span class="arithmatex">\(f(x_k)\)</span> 的一个二次上界为</p>
+<div class="arithmatex">\[
+q_{x_k}(y) = f(x_k) + \nabla f(x_k)^\top (y - x_k) + \frac{1}{2\alpha} \Vert y - x_k \Vert^2
+\]</div>
+<p>所以有</p>
+<div class="arithmatex">\[
+f(x_{k + 1}) \leqslant q_{x_k}(x_{k + 1}) = q_{x_{k}}(x_k) - \frac{1}{2L} \Vert \nabla f(x_k) \Vert^2 = f(x_k) - \frac{1}{2L}\Vert \nabla f(x_k) \Vert^2
+\]</div>
+<p>因此有</p>
+<div class="arithmatex">\[
+\lim_{n \to \infty}\sum_{k = 1}^{n} \frac{1}{2L} \Vert \nabla f(x_k) \Vert^2 = \lim_{k \to \infty} f(x_0) - f(x_k) = f - f^* &lt; \infty \implies \lim\limits_{k \to \infty} \Vert \nabla f(x_k) \Vert = 0
+\]</div>
+</details>
+<p>这就证明了梯度下降法在一般函数上的收敛性。</p>
+<h3 id="_4">凸函数上的收敛性</h3>
+<div class="admonition note">
+<p class="admonition-title">梯度法在凸函数上的收敛性</p>
+<p>设函数 <span class="arithmatex">\(f(x)\)</span> 为凸的梯度 <span class="arithmatex">\(L\)</span>-利普希茨连续函数，<span class="arithmatex">\(f^* = f(x^*) = \inf_x f(x)\)</span> 存在且可达。如果步长 <span class="arithmatex">\(\alpha_k\)</span> 取为常数 <span class="arithmatex">\(\alpha\)</span> 且满足 <span class="arithmatex">\(0 &lt; \alpha \leqslant \dfrac{1}{L}\)</span>，那么由迭代</p>
+<div class="arithmatex">\[
+x_{k + 1} = x_k - \alpha \nabla f(x)
+\]</div>
+<p>得到的点列 <span class="arithmatex">\(\{x_k\}\)</span> 的函数值收敛到最优值，且在函数值的意义下收敛速度为 <span class="arithmatex">\(\mathcal{O}\left(\dfrac{1}{k}\right)\)</span>。</p>
+</div>
+<details class="quote">
+<summary>证明</summary>
+<p>因为函数 <span class="arithmatex">\(f\)</span> 是利普希茨可微函数，对任意的 <span class="arithmatex">\(x\)</span>，根据二次上界</p>
+<div class="arithmatex">\[
+f(x - \alpha \nabla f(x)) \leqslant f(x) - \alpha \left(1 - \frac{L \alpha}{2}\right) \Vert \nabla f(x) \Vert^2
+\]</div>
+<p>记 <span class="arithmatex">\(\widetilde{x} = x - \alpha \nabla f(x)\)</span> 并限制 <span class="arithmatex">\(0 &lt; \alpha \leqslant \dfrac{1}{L}\)</span>，我们有</p>
+<div class="arithmatex">\[
+\begin{aligned}
+f(\widetilde{x}) &amp;\leqslant f(x) - \dfrac{\alpha}{2} \Vert \nabla f(x) \Vert^2 \\
+&amp; \leqslant f^* + \nabla f(x)^\top (x - x^*) - \dfrac{\alpha}{2} \Vert \nabla f(x) \Vert^2 \\
+&amp;= f^* + \dfrac{1}{2\alpha} \left( \Vert x - x^* \Vert^2 - \Vert x - x^* - \alpha \nabla f(x) \Vert^2 \right) \\
+&amp;= f^* + \dfrac{1}{2\alpha} \left( \Vert x - x^* \Vert^2 - \Vert \widetilde{x} - x^* \Vert^2 \right)
+\end{aligned}
+\]</div>
+<p>其中第二个不等式为 <span class="arithmatex">\(f\)</span> 的凸性。在上式中取 <span class="arithmatex">\(x = x^{i-1}, \widetilde{x} = x^i\)</span> 并将不等式对 <span class="arithmatex">\(i = 1, 2, \dots, k\)</span> 求和得到</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\sum_{i = 1}^{k} \left( f(x^i) - f^* \right) &amp;\leqslant \dfrac{1}{2\alpha} \sum_{i = 1}^k \left( \Vert x^{i - 1} - x^* \Vert^2 - \Vert x^i - x^* \Vert^2 \right) \\
+&amp;= \dfrac{1}{2\alpha}\left( \Vert x^0 - x^* \Vert^2 - \Vert x^k - x^* \Vert^2 \right) \\
+&amp;\leqslant \dfrac{1}{2\alpha} \Vert x^0 - x^* \Vert^2
+\end{aligned}
+\]</div>
+<p>根据二次上界得知 <span class="arithmatex">\(f(x^i)\)</span> 是非增的，所以</p>
+<div class="arithmatex">\[
+f(x^k) - f^* \leqslant \dfrac{1}{k} \sum_{i = 1}^k \left( f(x^i) - f^* \right) \leqslant \dfrac{1}{2k\alpha} \Vert x^0 - x^* \Vert^2
+\]</div>
+</details>
+<p>如果函数 <span class="arithmatex">\(f\)</span> 还是 <span class="arithmatex">\(m\)</span>-强凸函数，则梯度法的收敛速度会进一步提升为 <span class="arithmatex">\(\mathcal{Q}\)</span>-线性收敛。</p>
+<h3 id="_5">强凸函数上的收敛性</h3>
+<p>再给出收敛性定理之前，我们需要下面的定理来揭示凸的梯度 <span class="arithmatex">\(L\)</span>-利普希茨连续函数的另一个重要的性质。</p>
+<div class="admonition note">
+<p class="admonition-title">引理</p>
+<p>设函数 <span class="arithmatex">\(f(x)\)</span> 是 <span class="arithmatex">\(\mathbb{R}^n\)</span> 上的凸可微函数，则一下结论等价：</p>
+<ul>
+<li><span class="arithmatex">\(f\)</span> 的梯度为 <span class="arithmatex">\(L\)</span>-利普希茨连续的；</li>
+<li>函数 <span class="arithmatex">\(g(x) := \dfrac{L}{2} x^\top x - f(x)\)</span> 是凸函数；</li>
+<li><span class="arithmatex">\(\nabla f(x)\)</span> 有<strong>余强制性</strong>，即对任意的 <span class="arithmatex">\(x, y \in \mathbb{R}^n\)</span>，有</li>
+</ul>
+<div class="arithmatex">\[
+\left( \nabla f(x) - \nabla f(x) \right)^\top (x - y) \geqslant \dfrac{1}{L} \Vert \nabla f(x) - \nabla f(y) \Vert^2
+\]</div>
+</div>
+<p>上述引理的第三条余强制性其实是对单调性的一种加强，若函数 <span class="arithmatex">\(f(x)\)</span> 为单调函数，则其函数值的变化与自变量的变化同号，即</p>
+<div class="arithmatex">\[
+\left( f(x) - f(x) \right)^\top (x - y) \geqslant 0
+\]</div>
+<p>但是余强制性把不等式右侧的 <span class="arithmatex">\(0\)</span> 换成了一个二次的非负项，是一种加强。引理表明若函数 <span class="arithmatex">\(f(x)\)</span> 是凸函数，则函数梯度 <span class="arithmatex">\(L\)</span>-利普希茨连续、二次上界（引理的证明需要）和余强制性等价，只要知道其中一个就可以推出另外两个。</p>
+<p>接下来给出梯度法在强凸函数下的收敛性</p>
+<div class="admonition note">
+<p class="admonition-title">梯度法在强凸函数上的收敛性</p>
+<p>设函数 <span class="arithmatex">\(f(x)\)</span> 为 <span class="arithmatex">\(m\)</span>-强凸函数的梯度 <span class="arithmatex">\(L\)</span>-利普希茨连续函数，<span class="arithmatex">\(f^* = f(x^*) = \inf_x f(x)\)</span> 存在且可达。如果步长 <span class="arithmatex">\(\alpha_k\)</span> 取为常数 <span class="arithmatex">\(\alpha\)</span> 且满足 <span class="arithmatex">\(0 &lt; \alpha \leqslant \dfrac{2}{m + L}\)</span>，那么由迭代</p>
+<div class="arithmatex">\[
+x_{k + 1} = x_k - \alpha \nabla f(x)
+\]</div>
+<p>得到的点列 <span class="arithmatex">\(\{x_k\}\)</span> 的函数值收敛到最优值，且为 <span class="arithmatex">\(\mathcal{Q}\)</span> 线性收敛。</p>
+</div>
+<details class="quote">
+<summary>证明</summary>
+<p>首先根据 <span class="arithmatex">\(f\)</span> 强凸且 <span class="arithmatex">\(\nabla f\)</span> 利普希茨连续，可得</p>
+<div class="arithmatex">\[
+g(x) = f(x) - \dfrac{m}{2}x^\top x
+\]</div>
+<p>为凸函数且 <span class="arithmatex">\(\dfrac{L - m}{2} x^\top x - g(x)\)</span> 为凸函数。由引理知 <span class="arithmatex">\(g(x)\)</span> 是梯度 <span class="arithmatex">\((L - m)\)</span>-利普希茨连续的。再次利用引理可得关于 <span class="arithmatex">\(g(x)\)</span> 的余强制性</p>
+<div class="arithmatex">\[
+\left( \nabla g(x) - \nabla g(x) \right)^\top (x - y) \geqslant \dfrac{1}{L - m} \Vert \nabla g(x) - \nabla g(y) \Vert^2 
+\]</div>
+<p>带入 <span class="arithmatex">\(g(x)\)</span> 的表达式，可得</p>
+<div class="arithmatex">\[
+\left( \nabla g(x) - \nabla g(x) \right)^\top (x - y) \geqslant \dfrac{mL}{m + L} \Vert x - y \Vert^2 + \dfrac{1}{m + L} \Vert \nabla f(x) - \nabla f(y) \Vert^2
+\]</div>
+<p>然后我们估计在固定步长下梯度法的收敛速度。设步长 <span class="arithmatex">\(\alpha \in \left( 0, \dfrac{2}{m + L} \right)\)</span>，则</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\Vert x^{k + 1} - x^* \Vert^2_2 &amp;= \Vert x^k - \alpha \nabla f(x^k) - x^* \Vert^2 \\
+&amp;= \Vert x^k - x^* \Vert^2 - 2\alpha \nabla f(x^k)^\top (x^k - x^*) + \alpha^2 \Vert \nabla f(x^k) \Vert^2 \\
+&amp;\leqslant \left( 1 - \alpha\dfrac{2mL}{m + L} \right) \Vert x^k - x^* \Vert^2 + \alpha \left( \alpha - \dfrac{2}{m + L} \right) \Vert \nabla f(x^k) \Vert^2 \\
+&amp;\leqslant \left( 1 - \alpha \dfrac{2mL}{m + L} \right) \Vert x^k - x^* \Vert^2
+\end{aligned}
+\]</div>
+<p>注意到 <span class="arithmatex">\(\nabla f(x^*) = 0\)</span> 因此</p>
+<div class="arithmatex">\[
+\Vert x^k - x^* \Vert^2 \leqslant c^k \Vert x^0 - x^* \Vert^2, c = 1 - \alpha \dfrac{2mL}{m + L} &lt; 1
+\]</div>
+<p>即在强凸函数的条件下，梯度法是 <span class="arithmatex">\(\mathcal{Q}\)</span> 线性收敛的。</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2023 - 2025 YufengPeng
+    </div>
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/PaPa-jun" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="mailto:<pengyufenguni@mail.ustc.edu.cn>" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4l217.6 163.2c11.4 8.5 27 8.5 38.4 0l217.6-163.2c12.1-9.1 19.2-23.3 19.2-38.4 0-26.5-21.5-48-48-48zM0 176v208c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64V176L294.4 339.2a63.9 63.9 0 0 1-76.8 0z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://steamcommunity.com/id/NeitherDoI/" target="_blank" rel="noopener" title="steamcommunity.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M496 256c0 137-111.2 248-248.4 248-113.8 0-209.6-76.3-239-180.4l95.2 39.3c6.4 32.1 34.9 56.4 68.9 56.4 39.2 0 71.9-32.4 70.2-73.5l84.5-60.2c52.1 1.3 95.8-40.9 95.8-93.5 0-51.6-42-93.5-93.7-93.5s-93.7 42-93.7 93.5v1.2L176.6 279c-15.5-.9-30.7 3.4-43.5 12.1L0 236.1C10.2 108.4 117.1 8 247.6 8 384.8 8 496 119 496 256M155.7 384.3l-30.5-12.6a52.8 52.8 0 0 0 27.2 25.8c26.9 11.2 57.8-1.6 69-28.4 5.4-13 5.5-27.3.1-40.3S206 305.6 193 300.2c-12.9-5.4-26.7-5.2-38.9-.6l31.5 13c19.8 8.2 29.2 30.9 20.9 50.7-8.3 19.9-31 29.2-50.8 21m173.8-129.9c-34.4 0-62.4-28-62.4-62.3s28-62.3 62.4-62.3 62.4 28 62.4 62.3-27.9 62.3-62.4 62.3m.1-15.6c25.9 0 46.9-21 46.9-46.8 0-25.9-21-46.8-46.9-46.8s-46.9 21-46.9 46.8c.1 25.8 21.1 46.8 46.9 46.8"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.prune", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+  
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  
+    <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script> 
+    <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script> 
+    <script src="../../../assets/javascripts/katex.js"></script>
+  
+  
+
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

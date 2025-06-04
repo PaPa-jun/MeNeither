@@ -1,0 +1,40 @@
+/* PingFang SC @font-face definitions */
+@font-face {
+    font-family: 'PingFang SC';
+    src: url('../fonts/PingFang-Relaxed/PingFangRelaxedSC-Light.otf') format('opentype');
+    font-weight: 300; /* Light */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PingFang SC';
+    src: url('../fonts/PingFang-Relaxed/PingFangRelaxedSC-Regular.otf') format('opentype');
+    font-weight: 400; /* Regular */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PingFang SC';
+    src: url('../fonts/PingFang-Relaxed/PingFangRelaxedSC-Semibold.otf') format('opentype');
+    font-weight: 600; /* Semibold (替代 Bold) */
+    font-style: normal;
+}
+
+/* Fira Code @font-face definitions */
+@font-face {
+    font-family: 'Fira Code';
+    src: url('../fonts/Fira_Code_v6/woff2/FiraCode-Regular.woff2') format('woff2'),
+        url('../fonts/Fira_Code_v6/woff/FiraCode-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --md-text-font: 'PingFang SC';
+    --md-code-font: 'Fira Code';
+}
+
+pre code {
+    font-family: 'Fira Code', monospace;
+    font-feature-settings: "liga" 1, "calt" 1;
+}
