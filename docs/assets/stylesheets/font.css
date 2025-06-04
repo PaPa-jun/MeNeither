@@ -33,3 +33,8 @@
     --md-text-font: 'PingFang SC';
     --md-code-font: 'Fira Code';
 }
+
+pre code {
+    font-family: 'Fira Code', monospace;
+    font-feature-settings: "liga" 1, "calt" 1;
+}
