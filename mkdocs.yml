@@ -49,21 +49,6 @@ nav:
         - 集中不等式: notes/BigDataAlgo/Fundation.md
         - 数据降维: notes/BigDataAlgo/DimensionalityReduction.md
         - JL变换的应用: notes/BigDataAlgo/JLApplication.md
-      - 数据结构:
-        - notes/DataStructure/index.md
-        - 线性表: notes/DataStructure/LinearTable.md
-      - 计算机网络:
-        - notes/ComputingNetworks/index.md
-        - 数据链路层: 
-          - 概述: notes/ComputingNetworks/DataLinkLayer.md
-          - 错误检测和纠正: notes/ComputingNetworks/ErrorDetectionAndCorrection.md
-          - 协议: notes/ComputingNetworks/DataLinkLayerProtocol.md
-        - 介质访问控制子层: 
-          - 概述: notes/ComputingNetworks/MediumAccessControlSublayer.md
-          - 信道分配协议: notes/ComputingNetworks/ChannelAllocationProtocol.md
-          - 以太网: notes/ComputingNetworks/Ethernet.md
-          - 无线局域网: notes/ComputingNetworks/WirelessLocalAreaNetwork.md
-          - 网桥: notes/ComputingNetworks/Bridge.md
   - 资源分享:
       - resources/index.md
   - 博客:
@@ -127,7 +112,7 @@ extra:
       link: https://steamcommunity.com/id/NeitherDoI/
   generator: false
 
-copyright: Copyright &copy; 2023 - 2025 YufengPeng
+copyright: Copyright &copy; 2023 - 2026 YufengPeng
 repo_url: https://github.com/PaPa-jun/MeNeither
 repo_name: PaPa-jun/MeNeither
 
